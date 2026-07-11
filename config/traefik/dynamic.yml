@@ -1,0 +1,84 @@
+# =============================================================================
+# Traefik v3 - Dynamic Configuration
+# =============================================================================
+# Defines reusable middlewares for security, compression, and rate limiting.
+# These are applied to Odoo routes via Docker labels in docker-compose.yml.
+# =============================================================================
+
+http:
+  # --- Middlewares ---
+  middlewares:
+    # Security Headers — protect against XSS, clickjacking, MIME sniffing
+    security-headers:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        frameDeny: true
+        sslRedirect: true
+        # HSTS: enforce HTTPS for 1 year, include subdomains
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 31536000
+        customFrameOptionsValue: "SAMEORIGIN"
+        customResponseHeaders:
+          X-Powered-By: ""
+          Server: ""
+
+    # Rate Limiting — prevent abuse and DDoS on tenant endpoints
+    rate-limit:
+      rateLimit:
+        average: 100    # 100 requests per second average
+        burst: 200      # Allow burst up to 200 requests
+        period: 1s
+
+    # Gzip Compression — reduce bandwidth for HTML/CSS/JS responses
+    compress:
+      compress:
+        excludedContentTypes:
+          - "image/png"
+          - "image/jpeg"
+          - "image/gif"
+          - "image/webp"
+          - "application/pdf"
+
+    # Retry — automatically retry failed upstream requests
+    retry:
+      retry:
+        attempts: 3
+        initialInterval: 500ms
+
+    # Buffering — handle large file uploads (Odoo attachments)
+    buffering:
+      buffering:
+        maxRequestBodyBytes: 104857600   # 100 MB max upload
+        memRequestBodyBytes: 2097152     # 2 MB in-memory buffer
+        maxResponseBodyBytes: 0          # No limit on responses
+        retryExpression: "IsNetworkError() && Attempts() < 3"
+
+    # Dashboard Auth — protect Traefik dashboard
+    dashboard-auth:
+      basicAuth:
+        users:
+          - "admin:$$apr1$$xyz$$hashedpassword"
+        removeHeader: true
+
+    # Chain — combine middlewares for Odoo routes
+    odoo-chain:
+      chain:
+        middlewares:
+          - security-headers
+          - rate-limit
+          - compress
+          - buffering
+
+  # --- Routers ---
+  routers:
+    # Traefik Dashboard (accessible at traefik.yourdomain.com)
+    dashboard:
+      rule: "Host(`traefik.yourdomain.com`)"
+      entryPoints:
+        - websecure
+      service: api@internal
+      middlewares:
+        - dashboard-auth
+      tls: {}

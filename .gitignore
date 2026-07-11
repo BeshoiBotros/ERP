@@ -1,0 +1,42 @@
+# Environment files
+.env
+*.env.local
+*.env.production
+
+# Docker
+docker-compose.override.yml
+
+# SSL Certificates
+acme.json
+*.pem
+*.key
+*.crt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backups
+backups/
+*.dump
+*.sql.gz
+
+# Logs
+logs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary
+tmp/
+temp/

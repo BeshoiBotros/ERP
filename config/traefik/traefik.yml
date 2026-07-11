@@ -1,0 +1,77 @@
+# =============================================================================
+# Traefik v3 - Static Configuration
+# =============================================================================
+# Reverse proxy handling:
+#   - Dynamic subdomain routing (tenant1.yourdomain.com → Odoo)
+#   - SSL termination with wildcard Let's Encrypt certificates
+#   - Load balancing across Odoo web containers
+#   - HTTP → HTTPS redirection
+# =============================================================================
+
+# --- API & Dashboard ---
+api:
+  dashboard: true
+  insecure: false  # Dashboard protected by authentication middleware
+
+# --- Entry Points ---
+entryPoints:
+  # HTTP entrypoint — redirects all traffic to HTTPS
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+
+  # HTTPS entrypoint — main production traffic
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: "yourdomain.com"
+            sans:
+              - "*.yourdomain.com"
+
+# --- Providers ---
+providers:
+  # Docker provider: auto-discovers services via container labels
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false  # Only route containers with traefik.enable=true
+    network: erp_frontend     # Use the frontend network for routing
+    watch: true
+
+  # File provider: loads dynamic configuration (middlewares, etc.)
+  file:
+    filename: "/etc/traefik/dynamic.yml"
+    watch: true
+
+# --- Certificate Resolvers ---
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "admin@yourdomain.com"
+      storage: "/letsencrypt/acme.json"
+      # DNS-01 challenge for wildcard certificate support
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 10
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+
+# --- Logging ---
+log:
+  level: INFO
+  format: json
+
+accessLog:
+  format: json
+  filters:
+    statusCodes:
+      - "400-599"
+    retryAttempts: true

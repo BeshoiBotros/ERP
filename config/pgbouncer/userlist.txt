@@ -1,0 +1,14 @@
+; =============================================================================
+; PgBouncer User Authentication File
+; =============================================================================
+; Format: "username" "password"
+; The password must match the PostgreSQL user's password.
+; For MD5 auth, use: "username" "md5<md5hash>"
+; For plaintext (development only): "username" "password"
+;
+; SECURITY: In production, use MD5 hashed passwords.
+; Generate MD5: echo -n "passwordusername" | md5sum
+; Then prepend "md5" to the hash.
+; =============================================================================
+
+"odoo" "Ch@ng3M3_Str0ng_P@ssw0rd_2026!"
