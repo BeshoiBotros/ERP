@@ -1,76 +1,11 @@
 # =============================================================================
-# DOCKER COMPOSE — Odoo 17 Enterprise SaaS Platform
-# =============================================================================
-#
-# Services:
-#   1. traefik      — Reverse proxy, SSL termination, subdomain routing
-#   2. odoo-web     — UI workers (serves web requests, API, longpolling)
-#   3. odoo-worker  — Background processor (cron jobs, heavy reports)
-#   4. postgres     — Primary database (PostgreSQL 15)
-#   5. pgbouncer    — Connection pooler (transaction mode)
-#   6. redis        — Session store & ORM cache
-#
-# Networks:
-#   - frontend: Traefik ↔ Odoo-web (internet-facing)
-#   - backend:  All internal services (never exposed to internet)
-#
-# Volumes:
-#   - postgres-data:  Database persistence
-#   - odoo-filestore: Attachments, reports, file assets
-#   - redis-data:     Session & cache persistence
-#   - traefik-certs:  SSL certificate storage (Let's Encrypt)
-#
+# DOCKER COMPOSE — Odoo 17 Enterprise SaaS Platform (Nginx Edition)
 # =============================================================================
 
 services:
 
   # ===========================================================================
-  # 1. TRAEFIK — Reverse Proxy & SSL Terminator
-  # ===========================================================================
-  # Routes *.yourdomain.com → odoo-web
-  # Handles wildcard SSL via Let's Encrypt DNS-01 challenge
-  # ===========================================================================
-  traefik:
-    image: traefik:v3.1
-    container_name: erp-traefik
-    restart: unless-stopped
-    ports:
-      - "80:80"       # HTTP → redirects to HTTPS
-      - "443:443"     # HTTPS — main production traffic
-    environment:
-      # Cloudflare DNS API token for wildcard SSL
-      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
-    volumes:
-      # Docker socket (read-only) for service auto-discovery
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      # Traefik configuration files
-      - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
-      - ./config/traefik/dynamic.yml:/etc/traefik/dynamic.yml:ro
-      # Persistent SSL certificate storage
-      - traefik-certs:/letsencrypt
-    networks:
-      - frontend
-      - backend
-    labels:
-      - "traefik.enable=true"
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 256M
-    healthcheck:
-      test: ["CMD", "traefik", "healthcheck"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
-
-  # ===========================================================================
-  # 2. ODOO WEB — UI Workers (User-Facing)
-  # ===========================================================================
-  # Handles all HTTP requests, API calls, and WebSocket connections.
-  # Cron jobs are DISABLED (max_cron_threads=0) — handled by odoo-worker.
-  # Connects to PostgreSQL via PgBouncer for connection pooling.
+  # 1. ODOO WEB — UI Workers (User-Facing)
   # ===========================================================================
   odoo-web:
     build:
@@ -86,8 +21,8 @@ services:
       redis:
         condition: service_healthy
     ports:
-      - "8069:8069"    # Odoo Web UI (direct access for dev/setup)
-      - "8072:8072"    # Longpolling / WebSocket
+      - "127.0.0.1:8069:8069" # Odoo Web UI (Accessible only via Nginx)
+      - "127.0.0.1:8072:8072" # Longpolling / WebSocket (Accessible only via Nginx)
     environment:
       - HOST=pgbouncer
       - PORT=6432
@@ -99,58 +34,18 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - ODOO_ROLE=web
     volumes:
-      # Odoo configuration
       - ./config/odoo-web.conf:/etc/odoo/odoo.conf:ro
-      # Shared filestore (attachments, generated reports)
       - odoo-filestore:/var/lib/odoo
+      - ./custom_addons:/opt/odoo/custom_addons:ro
     networks:
-      - frontend
-      - backend
+      - erp_network
     command:
       - "odoo"
       - "--config=/etc/odoo/odoo.conf"
-      - "--addons-path=/opt/odoo/extra-addons,/opt/odoo/oca-addons,/usr/lib/python3/dist-packages/odoo/addons"
+      - "--addons-path=/opt/odoo/extra-addons,/opt/odoo/oca-addons,/usr/lib/python3/dist-packages/odoo/addons,/opt/odoo/custom_addons"
       - "--proxy-mode"
       - "--workers=4"
       - "--max-cron-threads=0"
-    labels:
-      # --- Traefik Routing ---
-      - "traefik.enable=true"
-      # Docker network Traefik uses to reach this container
-      - "traefik.docker.network=erp_frontend"
-
-      # --- Main HTTPS Router (catches all *.yourdomain.com) ---
-      - "traefik.http.routers.odoo-web.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.${DOMAIN}`)"
-      - "traefik.http.routers.odoo-web.entrypoints=websecure"
-      - "traefik.http.routers.odoo-web.tls=true"
-      - "traefik.http.routers.odoo-web.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.odoo-web.tls.domains[0].main=${DOMAIN}"
-      - "traefik.http.routers.odoo-web.tls.domains[0].sans=*.${DOMAIN}"
-      - "traefik.http.routers.odoo-web.middlewares=odoo-chain@file"
-      - "traefik.http.routers.odoo-web.service=odoo-web-svc"
-
-      # --- WebSocket Router (longpolling/live notifications) ---
-      - "traefik.http.routers.odoo-websocket.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.${DOMAIN}`) && PathPrefix(`/websocket`)"
-      - "traefik.http.routers.odoo-websocket.entrypoints=websecure"
-      - "traefik.http.routers.odoo-websocket.tls=true"
-      - "traefik.http.routers.odoo-websocket.service=odoo-websocket-svc"
-      - "traefik.http.routers.odoo-websocket.priority=20"
-
-      # --- Root Domain Router (yourdomain.com without subdomain) ---
-      - "traefik.http.routers.odoo-root.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.odoo-root.entrypoints=websecure"
-      - "traefik.http.routers.odoo-root.tls=true"
-      - "traefik.http.routers.odoo-root.middlewares=odoo-chain@file"
-      - "traefik.http.routers.odoo-root.service=odoo-web-svc"
-
-      # --- Services (backend targets) ---
-      - "traefik.http.services.odoo-web-svc.loadbalancer.server.port=8069"
-      - "traefik.http.services.odoo-websocket-svc.loadbalancer.server.port=8072"
-
-      # --- Sticky Sessions (ensures tenant affinity) ---
-      - "traefik.http.services.odoo-web-svc.loadbalancer.sticky.cookie.name=odoo_session"
-      - "traefik.http.services.odoo-web-svc.loadbalancer.sticky.cookie.httpOnly=true"
-      - "traefik.http.services.odoo-web-svc.loadbalancer.sticky.cookie.secure=true"
     deploy:
       resources:
         limits:
@@ -158,12 +53,7 @@ services:
           memory: "${ODOO_WEB_MEMORY_LIMIT:-4G}"
 
   # ===========================================================================
-  # 3. ODOO WORKER — Background Processor
-  # ===========================================================================
-  # Dedicated container for cron jobs, scheduled actions, and heavy reports.
-  # Runs in threaded mode (workers=0) with max_cron_threads=2.
-  # Connects DIRECTLY to PostgreSQL (bypasses PgBouncer) because
-  # LISTEN/NOTIFY is incompatible with PgBouncer's transaction mode.
+  # 2. ODOO WORKER — Background Processor
   # ===========================================================================
   odoo-worker:
     build:
@@ -187,22 +77,18 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - ODOO_ROLE=worker
     volumes:
-      # Odoo configuration (worker-specific)
       - ./config/odoo-worker.conf:/etc/odoo/odoo.conf:ro
-      # SAME filestore as odoo-web (shared volume for attachments)
       - odoo-filestore:/var/lib/odoo
+      - ./custom_addons:/opt/odoo/custom_addons:ro
     networks:
-      - backend
+      - erp_network
     command:
       - "odoo"
       - "--config=/etc/odoo/odoo.conf"
-      - "--addons-path=/opt/odoo/extra-addons,/opt/odoo/oca-addons,/usr/lib/python3/dist-packages/odoo/addons"
+      - "--addons-path=/opt/odoo/extra-addons,/opt/odoo/oca-addons,/usr/lib/python3/dist-packages/odoo/addons,/opt/odoo/custom_addons"
       - "--no-http"
       - "--max-cron-threads=2"
       - "--workers=0"
-    labels:
-      # Worker is NOT exposed to Traefik (no web traffic)
-      - "traefik.enable=false"
     deploy:
       resources:
         limits:
@@ -210,31 +96,29 @@ services:
           memory: "${ODOO_WORKER_MEMORY_LIMIT:-4G}"
 
   # ===========================================================================
-  # 4. POSTGRESQL 15 — Primary Database
-  # ===========================================================================
-  # Optimized for multi-tenant Odoo (one database per tenant).
-  # Uses MD5 auth for PgBouncer compatibility.
-  # Persistent data stored in named volume.
+  # 3. POSTGRESQL 15 — Primary Database
   # ===========================================================================
   postgres:
     image: postgres:15-alpine
     container_name: erp-postgres
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      # MD5 auth for PgBouncer compatibility (PostgreSQL 15 defaults to SCRAM)
-      - POSTGRES_HOST_AUTH_METHOD=md5
-      - POSTGRES_INITDB_ARGS=--auth-host=md5
+      - HOST=postgres
+      - PORT=5432
+      - USER=${POSTGRES_USER}
+      - PASSWORD=${POSTGRES_PASSWORD}
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - ODOO_ROLE=web
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - backend
-    # PostgreSQL performance tuning for Odoo
+      - erp_network
     command:
       - "postgres"
-      - "-c" 
+      - "-c"
       - "max_connections=200"
       - "-c"
       - "shared_buffers=512MB"
@@ -284,21 +168,14 @@ services:
           cpus: "${POSTGRES_CPU_LIMIT:-2.0}"
           memory: "${POSTGRES_MEMORY_LIMIT:-4G}"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 30s
 
   # ===========================================================================
-  # 5. PGBOUNCER — Connection Pooler
-  # ===========================================================================
-  # Sits between Odoo-web and PostgreSQL.
-  # Transaction mode: releases connections after each transaction.
-  # Prevents connection exhaustion under high tenant load.
-  #
-  # NOTE: odoo-worker bypasses PgBouncer (connects directly to postgres)
-  # because cron uses LISTEN/NOTIFY which requires session-level pooling.
+  # 4. PGBOUNCER — Connection Pooler
   # ===========================================================================
   pgbouncer:
     image: edoburu/pgbouncer:latest
@@ -311,27 +188,21 @@ services:
       - ./config/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro
       - ./config/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt:ro
     networks:
-      - backend
+      - erp_network
     deploy:
       resources:
         limits:
           cpus: "0.5"
           memory: 128M
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -p 6432 -U odoo || exit 1"]
+      test: [ "CMD-SHELL", "pg_isready -h 127.0.0.1 -p 6432 -U odoo || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 10s
 
   # ===========================================================================
-  # 6. REDIS 7 — Session Store & ORM Cache
-  # ===========================================================================
-  # Handles:
-  #   - User session storage (offloads PostgreSQL)
-  #   - ORM computed field caching (faster page loads)
-  #
-  # Configured with AOF persistence for durability.
+  # 5. REDIS 7 — Session Store & ORM Cache
   # ===========================================================================
   redis:
     image: redis:7-alpine
@@ -340,7 +211,7 @@ services:
     volumes:
       - redis-data:/data
     networks:
-      - backend
+      - erp_network
     command:
       - "redis-server"
       - "--appendonly"
@@ -365,53 +236,27 @@ services:
           cpus: "0.5"
           memory: 512M
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 3s
       retries: 3
       start_period: 5s
 
-
 # =============================================================================
-# NETWORKS — Strict Isolation
-# =============================================================================
-# frontend: Internet-facing. Only Traefik and Odoo-web are connected.
-#           PostgreSQL, Redis, PgBouncer are NEVER accessible from here.
-#
-# backend:  Internal only. All services communicate here.
-#           Never exposed to the internet.
+# NETWORKS & VOLUMES
 # =============================================================================
 networks:
-  frontend:
+  erp_network:
     driver: bridge
-    name: erp_frontend
-  backend:
-    driver: bridge
-    internal: true
-    name: erp_backend
+    name: erp_network
 
-
-# =============================================================================
-# VOLUMES — Persistent Named Storage
-# =============================================================================
 volumes:
-  # PostgreSQL data directory
   postgres-data:
     driver: local
     name: erp_postgres_data
-
-  # Odoo filestore (attachments, generated reports, assets)
-  # Shared between odoo-web and odoo-worker
   odoo-filestore:
     driver: local
     name: erp_odoo_filestore
-
-  # Redis persistence (sessions + cache)
   redis-data:
     driver: local
     name: erp_redis_data
-
-  # Traefik SSL certificates (Let's Encrypt ACME)
-  traefik-certs:
-    driver: local
-    name: erp_traefik_certs
