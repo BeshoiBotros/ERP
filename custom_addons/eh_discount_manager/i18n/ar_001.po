@@ -1,0 +1,448 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eh_discount_manager
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-16 11:00+0000\n"
+"PO-Revision-Date: 2026-09-16 11:00+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: ar_001\n"
+
+#. module: eh_discount_manager
+#: model:account.journal,name:eh_discount_manager.discount_journal
+msgid "Discount Journal"
+msgstr "يومية الخصم"
+
+#. module: eh_discount_manager
+#: model:eh.discount.type,name:eh_discount_manager.discount_type_annual
+msgid "Annual Discount"
+msgstr "خصم سنوي"
+
+#. module: eh_discount_manager
+#: model:eh.discount.type,name:eh_discount_manager.discount_type_per_invoice
+msgid "Per-Invoice Discount"
+msgstr "خصم وقتي على الفاتورة"
+
+#. module: eh_discount_manager
+#: model:eh.discount.type,name:eh_discount_manager.discount_type_quarterly
+msgid "Quarterly Discount"
+msgstr "خصم ربع سنوي"
+
+#. module: eh_discount_manager
+#: model:eh.discount.type,name:eh_discount_manager.discount_type_semi_annual
+msgid "Semi-Annual Discount"
+msgstr "خصم نصف سنوي"
+
+#. module: eh_discount_manager
+#: model:ir.model,name:eh_discount_manager.model_eh_discount_compute_wizard
+msgid "Compute Discount Wizard"
+msgstr "معالج حساب الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model,name:eh_discount_manager.model_eh_discount_entry
+msgid "Discount Entry"
+msgstr "سجل الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model,name:eh_discount_manager.model_eh_discount_program
+msgid "Discount Program"
+msgstr "برنامج الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model,name:eh_discount_manager.model_eh_discount_purge_wizard
+msgid "Purge Discount Wizard"
+msgstr "معالج مسح الخصومات"
+
+#. module: eh_discount_manager
+#: model:ir.model,name:eh_discount_manager.model_eh_discount_type
+msgid "Discount Type"
+msgstr "نوع الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model,name:eh_discount_manager.model_eh_discount_vendor_line
+msgid "Discount Vendor Line"
+msgstr "سطر مورد الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__company_discount
+msgid "Company Share (Expense)"
+msgstr "حصة المؤسسة (مصروف)"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__currency_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__currency_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_vendor_line__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__customer_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__customer_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__customer_id
+msgid "Customer"
+msgstr "العميل"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__date_from
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__date_from
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__date_to
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__date_to
+msgid "End Date"
+msgstr "تاريخ النهاية"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__discount_type_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__discount_type_id
+msgid "Discount Type"
+msgstr "نوع الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__invoice_ids
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__invoice_ids
+msgid "Invoices"
+msgstr "الفواتير"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__program_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__program_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_purge_wizard__program_id
+msgid "Discount Program"
+msgstr "برنامج الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__total_discount
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__total_discount
+msgid "Total Discount"
+msgstr "إجمالي الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__total_discount_pct
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__total_discount_pct
+msgid "Total Discount (%)"
+msgstr "إجمالي الخصم (%)"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__total_invoiced
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__total_invoiced
+msgid "Total Invoiced"
+msgstr "إجمالي الفواتير"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__vendor_line_ids
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__vendor_line_ids
+msgid "Vendor Distribution"
+msgstr "توزيع الموردين"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__vendor_total_discount
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__vendor_total_discount
+msgid "Vendors Share"
+msgstr "إجمالي حصة الموردين"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__company_discount
+msgid "Company Share (Expense)"
+msgstr "حصة المؤسسة (مصروف)"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__company_id
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__move_id
+msgid "Journal Entry"
+msgstr "القيد المحاسبي"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__name
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_entry__state
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__company_share_pct
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__company_share_pct
+msgid "Company Share (%)"
+msgstr "حصة المؤسسة (%)"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__discount_expense_account_id
+msgid "Discount Expense Account"
+msgstr "حساب مصروف الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__discount_journal_id
+msgid "Discount Journal"
+msgstr "يومية الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__entry_ids
+msgid "Discount Entries"
+msgstr "سجلات الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__name
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_type__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_program__vendor_share_pct
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_compute_wizard__vendor_share_pct
+msgid "Vendor Share (%)"
+msgstr "حصة الموردين (%)"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_purge_wizard__delete_programs
+msgid "Delete Programs as well?"
+msgstr "حذف برامج الخصم أيضاً؟"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_purge_wizard__purge_mode
+msgid "Purge Mode"
+msgstr "وضع المسح"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_type__code
+msgid "Code"
+msgstr "الرمز"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_vendor_line__discount_amount
+msgid "Discount Amount"
+msgstr "مبلغ الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_vendor_line__entry_id
+msgid "Discount Entry"
+msgstr "سجل الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_vendor_line__invoiced_amount
+msgid "Invoiced Amount"
+msgstr "مبلغ الفاتورة"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_vendor_line__partner_id
+msgid "Vendor"
+msgstr "المورد"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields,field_description:eh_discount_manager.field_eh_discount_vendor_line__percentage_of_total
+msgid "% of Total"
+msgstr "النسبة (%)"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_entry__state__draft
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_program__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_entry__state__posted
+msgid "Posted"
+msgstr "مرحل"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_entry__state__reversed
+msgid "Reversed"
+msgstr "معكوس"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_program__state__cancelled
+msgid "Cancelled"
+msgstr "ملغي"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_program__state__confirmed
+msgid "Confirmed"
+msgstr "مؤكد"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_program__state__done
+msgid "Done"
+msgstr "منتهي"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_purge_wizard__purge_mode__all
+msgid "Purge All Discount Data"
+msgstr "مسح جميع الخصومات"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_purge_wizard__purge_mode__program
+msgid "Purge Specific Program"
+msgstr "مسح برنامج محدد"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_type__code__annual
+msgid "Annual Discount"
+msgstr "خصم سنوي"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_type__code__per_invoice
+msgid "Per-Invoice Discount"
+msgstr "خصم وقتي على الفاتورة"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_type__code__quarterly
+msgid "Quarterly Discount"
+msgstr "خصم ربع سنوي"
+
+#. module: eh_discount_manager
+#: model:ir.model.fields.selection,name:eh_discount_manager.selection__eh_discount_type__code__semi_annual
+msgid "Semi-Annual Discount"
+msgstr "خصم نصف سنوي"
+
+#. module: eh_discount_manager
+#: model:ir.ui.menu,name:eh_discount_manager.menu_discount_config_root
+#: model:ir.ui.menu,name:eh_discount_manager.menu_discount_root
+msgid "Discounts"
+msgstr "الخصومات"
+
+#. module: eh_discount_manager
+#: model:ir.ui.menu,name:eh_discount_manager.menu_discount_entries
+msgid "Discount Entries"
+msgstr "سجلات الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.ui.menu,name:eh_discount_manager.menu_discount_programs
+msgid "Discount Programs"
+msgstr "برامج الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.ui.menu,name:eh_discount_manager.menu_discount_purge
+msgid "Purge Data (Test)"
+msgstr "مسح البيانات (اختبار)"
+
+#. module: eh_discount_manager
+#: model:ir.ui.menu,name:eh_discount_manager.menu_discount_types
+msgid "Discount Types"
+msgstr "أنواع الخصم"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_entry_form
+msgid "Confirm & Post"
+msgstr "تأكيد وترحيل"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_entry_form
+msgid "Reverse"
+msgstr "عكس القيد"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_entry_form
+msgid "Included Invoices"
+msgstr "الفواتير المشمولة"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "Compute Discount"
+msgstr "حساب الخصم"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "Mark as Done"
+msgstr "تحديد كمنتهي"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "Reset to Draft"
+msgstr "إعادة كمسودة"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "Accounting Info"
+msgstr "المعلومات المحاسبية"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_eh_discount_compute_wizard_form
+msgid "Create Discount Entry"
+msgstr "إنشاء سجل الخصم"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_eh_discount_compute_wizard_form
+msgid "Recalculate"
+msgstr "إعادة الحساب"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_eh_discount_compute_wizard_form
+msgid "Invoices Included"
+msgstr "الفواتير المشمولة"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_eh_discount_purge_wizard_form
+msgid "Confirm Purge"
+msgstr "تأكيد المسح"
+
+#. module: eh_discount_manager
+#: model_terms:ir.ui.view,arch_db:eh_discount_manager.view_discount_program_form
+msgid "e.g., 2026 Q1 5% Discount"
+msgstr "مثال: خصم الربع الأول 2026 - 5%"
+
+#. module: eh_discount_manager
+#: model:ir.actions.act_window,name:eh_discount_manager.action_eh_discount_program
+msgid "Discount Programs"
+msgstr "برامج الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.actions.act_window,name:eh_discount_manager.action_eh_discount_entry
+msgid "Discount Entries"
+msgstr "سجلات الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.actions.act_window,name:eh_discount_manager.action_eh_discount_type
+msgid "Discount Types"
+msgstr "أنواع الخصم"
+
+#. module: eh_discount_manager
+#: model:ir.actions.client,name:eh_discount_manager.action_eh_discount_dashboard
+msgid "Discount Dashboard"
+msgstr "لوحة الخصومات"
+
+#. module: eh_discount_manager
+#: model:ir.ui.menu,name:eh_discount_manager.menu_discount_dashboard
+msgid "Discount Dashboard"
+msgstr "لوحة الخصومات"

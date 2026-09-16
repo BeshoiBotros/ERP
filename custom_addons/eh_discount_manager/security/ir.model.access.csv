@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_eh_discount_type_user,eh.discount.type.user,model_eh_discount_type,base.group_user,1,1,1,1
+access_eh_discount_program_user,eh.discount.program.user,model_eh_discount_program,base.group_user,1,1,1,1
+access_eh_discount_entry_user,eh.discount.entry.user,model_eh_discount_entry,base.group_user,1,1,1,1
+access_eh_discount_vendor_line_user,eh.discount.vendor.line.user,model_eh_discount_vendor_line,base.group_user,1,1,1,1
+access_eh_discount_compute_wizard_user,eh.discount.compute.wizard.user,model_eh_discount_compute_wizard,base.group_user,1,1,1,1
+access_eh_discount_compute_vendor_wizard_user,eh.discount.compute.vendor.wizard.user,model_eh_discount_compute_vendor_wizard,base.group_user,1,1,1,1
+access_eh_discount_purge_wizard_user,eh.discount.purge.wizard.user,model_eh_discount_purge_wizard,base.group_user,1,1,1,1

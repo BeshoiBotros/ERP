@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard Menu -->
+    <menuitem id="menu_discount_dashboard"
+              name="Discount Dashboard"
+              parent="account.menu_finance_entries"
+              action="action_eh_discount_dashboard"
+              sequence="19"/>
+
+    <menuitem id="menu_discount_root" 
+              name="Discounts" 
+              parent="account.menu_finance_entries" 
+              sequence="20"/>
+
+    <menuitem id="menu_discount_programs" 
+              name="Discount Programs" 
+              parent="menu_discount_root" 
+              action="action_eh_discount_program" 
+              sequence="10"/>
+
+    <menuitem id="menu_discount_entries" 
+              name="Discount Entries" 
+              parent="menu_discount_root" 
+              action="action_eh_discount_entry" 
+              sequence="20"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_discount_config_root"
+              name="Discounts"
+              parent="account.menu_finance_configuration"
+              sequence="20"/>
+
+    <menuitem id="menu_discount_types" 
+              name="Discount Types" 
+              parent="menu_discount_config_root" 
+              action="action_eh_discount_type" 
+              sequence="10"/>
+
+    <menuitem id="menu_discount_purge" 
+              name="Purge Data (Test)" 
+              parent="menu_discount_config_root" 
+              action="action_eh_discount_purge_wizard" 
+              sequence="90"/>
+</odoo>

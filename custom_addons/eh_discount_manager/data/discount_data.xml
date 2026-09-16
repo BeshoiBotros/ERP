@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <data>
+        <!-- Sequence for Discount Entries -->
+        <record id="seq_eh_discount_entry" model="ir.sequence">
+            <field name="name">Discount Entry</field>
+            <field name="code">eh.discount.entry</field>
+            <field name="prefix">DISC/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Pre-populate Discount Types -->
+        <record id="discount_type_annual" model="eh.discount.type">
+            <field name="name">Annual Discount</field>
+            <field name="code">annual</field>
+        </record>
+        
+        <record id="discount_type_per_invoice" model="eh.discount.type">
+            <field name="name">Per-Invoice Discount</field>
+            <field name="code">per_invoice</field>
+        </record>
+        
+        <record id="discount_type_quarterly" model="eh.discount.type">
+            <field name="name">Quarterly Discount</field>
+            <field name="code">quarterly</field>
+        </record>
+        
+        <record id="discount_type_semi_annual" model="eh.discount.type">
+            <field name="name">Semi-Annual Discount</field>
+            <field name="code">semi_annual</field>
+        </record>
+        
+        <!-- Pre-create a journal for Discounts -->
+        <record id="discount_journal" model="account.journal">
+            <field name="name">Discount Journal</field>
+            <field name="code">DISC</field>
+            <field name="type">general</field>
+        </record>
+    </data>
+</odoo>

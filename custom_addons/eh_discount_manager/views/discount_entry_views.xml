@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_discount_entry_form" model="ir.ui.view">
+        <field name="name">eh.discount.entry.form</field>
+        <field name="model">eh.discount.entry</field>
+        <field name="arch" type="xml">
+            <form string="Discount Entry">
+                <header>
+                    <button name="action_post" type="object" string="Confirm &amp; Post" invisible="state != 'draft'" class="oe_highlight"/>
+                    <button name="action_reverse" type="object" string="Reverse" invisible="state != 'posted'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted,reversed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="program_id"/>
+                            <field name="customer_id"/>
+                            <field name="date"/>
+                            <field name="move_id"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_invoiced" widget="monetary"/>
+                            <field name="total_discount" widget="monetary"/>
+                            <field name="company_discount" widget="monetary"/>
+                            <field name="vendor_total_discount" widget="monetary"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Vendor Distribution">
+                            <field name="vendor_line_ids">
+                                <tree editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="invoiced_amount" sum="Total"/>
+                                    <field name="percentage_of_total" widget="percentage"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="discount_amount" sum="Total Discount"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Included Invoices">
+                            <field name="invoice_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_discount_entry_tree" model="ir.ui.view">
+        <field name="name">eh.discount.entry.tree</field>
+        <field name="model">eh.discount.entry</field>
+        <field name="arch" type="xml">
+            <tree string="Discount Entries">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="program_id"/>
+                <field name="customer_id"/>
+                <field name="total_discount" sum="Total"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_eh_discount_entry" model="ir.actions.act_window">
+        <field name="name">Discount Entries</field>
+        <field name="res_model">eh.discount.entry</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

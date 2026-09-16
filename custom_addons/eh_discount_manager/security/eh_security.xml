@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Re-use the existing groups from eh_account_base or create local ones if needed. 
+             Since eh_account_base provides group_eh_user, group_eh_manager, and group_eh_auditor, 
+             we will just define record rules here if necessary, or we can just rely on ir.model.access.csv. 
+             Let's add multi-company rules just to be safe. -->
+
+        <record id="eh_discount_program_comp_rule" model="ir.rule">
+            <field name="name">Discount Program multi-company</field>
+            <field name="model_id" ref="model_eh_discount_program"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="eh_discount_entry_comp_rule" model="ir.rule">
+            <field name="name">Discount Entry multi-company</field>
+            <field name="model_id" ref="model_eh_discount_entry"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

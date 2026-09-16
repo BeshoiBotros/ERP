@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+<t t-name="eh_discount_manager.DiscountDashboard" owl="1">
+    <div class="eh_discount_dashboard o_action">
+        <!-- Header -->
+        <div class="eh_dash_header">
+            <h2 class="eh_dash_title">
+                <i class="fa fa-pie-chart"/> لوحة الخصومات / Discount Dashboard
+            </h2>
+        </div>
+
+        <!-- Filters -->
+        <div class="eh_dash_filters">
+            <div class="eh_filter_group">
+                <div class="eh_filter_item">
+                    <label>من تاريخ / From:</label>
+                    <input type="date" class="o_input"
+                           t-att-value="state.date_from"
+                           t-on-change="onDateFromChange"/>
+                </div>
+                <div class="eh_filter_item">
+                    <label>إلى تاريخ / To:</label>
+                    <input type="date" class="o_input"
+                           t-att-value="state.date_to"
+                           t-on-change="onDateToChange"/>
+                </div>
+                <div class="eh_filter_item">
+                    <label>المورد / Vendor:</label>
+                    <select class="o_input" t-on-change="onVendorChange">
+                        <option value="">-- كل الموردين / All --</option>
+                        <t t-foreach="state.vendors_list" t-as="v" t-key="v.id">
+                            <option t-att-value="v.id" t-att-selected="state.vendor_id == v.id">
+                                <t t-esc="v.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+                <div class="eh_filter_actions">
+                    <button class="btn btn-primary" t-on-click="onApplyFilter">
+                        <i class="fa fa-search"/> تطبيق / Apply
+                    </button>
+                    <button class="btn btn-outline-secondary" t-on-click="onClearFilter">
+                        <i class="fa fa-times"/> مسح / Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div t-if="state.loading" class="eh_dash_loading">
+            <i class="fa fa-spinner fa-spin fa-3x"/>
+        </div>
+
+        <div t-if="!state.loading">
+            <!-- KPI Cards -->
+            <div class="eh_kpi_row">
+                <div class="eh_kpi_card eh_kpi_total">
+                    <div class="eh_kpi_icon"><i class="fa fa-money"/></div>
+                    <div class="eh_kpi_content">
+                        <span class="eh_kpi_value" t-esc="formatCurrency(state.kpi.total_discount)"/>
+                        <span class="eh_kpi_label">إجمالي الخصومات / Total Discounts</span>
+                    </div>
+                </div>
+
+                <div class="eh_kpi_card eh_kpi_company">
+                    <div class="eh_kpi_icon"><i class="fa fa-building"/></div>
+                    <div class="eh_kpi_content">
+                        <span class="eh_kpi_value" t-esc="formatCurrency(state.kpi.company_share)"/>
+                        <span class="eh_kpi_label">حصة المؤسسة / Company Share</span>
+                    </div>
+                </div>
+
+                <div class="eh_kpi_card eh_kpi_vendor">
+                    <div class="eh_kpi_icon"><i class="fa fa-truck"/></div>
+                    <div class="eh_kpi_content">
+                        <span class="eh_kpi_value" t-esc="formatCurrency(state.kpi.vendor_share)"/>
+                        <span class="eh_kpi_label">حصة الموردين / Vendors Share</span>
+                    </div>
+                </div>
+
+                <div class="eh_kpi_card eh_kpi_programs">
+                    <div class="eh_kpi_icon"><i class="fa fa-list-alt"/></div>
+                    <div class="eh_kpi_content">
+                        <span class="eh_kpi_value" t-esc="state.kpi.program_count"/>
+                        <span class="eh_kpi_label">عدد البرامج / Programs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendors Table -->
+            <div class="eh_dash_section">
+                <h4 class="eh_section_title">
+                    <i class="fa fa-truck"/> حصص الموردين / Vendor Shares
+                </h4>
+                <div class="table-responsive">
+                    <table class="table eh_dash_table">
+                        <thead>
+                            <tr>
+                                <th>المورد / Vendor</th>
+                                <th class="text-end">إجمالي الفواتير / Invoiced</th>
+                                <th class="text-end">مبلغ الخصم المستحق / Discount Due</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="state.vendors.length === 0">
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">لا توجد بيانات / No data</td>
+                                </tr>
+                            </t>
+                            <t t-foreach="state.vendors" t-as="v" t-key="v.vendor_name">
+                                <tr>
+                                    <td><i class="fa fa-user-circle text-muted me-1"/> <t t-esc="v.vendor_name"/></td>
+                                    <td class="text-end"><t t-esc="formatCurrency(v.total_invoiced)"/></td>
+                                    <td class="text-end fw-bold"><t t-esc="formatCurrency(v.total_discount)"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                        <tfoot t-if="state.vendors.length > 0">
+                            <tr class="eh_table_footer">
+                                <td class="fw-bold">الإجمالي / Total</td>
+                                <td class="text-end fw-bold">
+                                    <t t-esc="formatCurrency(state.vendors.reduce((s,v) => s + v.total_invoiced, 0))"/>
+                                </td>
+                                <td class="text-end fw-bold">
+                                    <t t-esc="formatCurrency(state.vendors.reduce((s,v) => s + v.total_discount, 0))"/>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Customers Table -->
+            <div class="eh_dash_section">
+                <h4 class="eh_section_title">
+                    <i class="fa fa-users"/> ملخص العملاء / Customer Summary
+                </h4>
+                <div class="table-responsive">
+                    <table class="table eh_dash_table">
+                        <thead>
+                            <tr>
+                                <th>العميل / Customer</th>
+                                <th class="text-end">عدد السجلات / Entries</th>
+                                <th class="text-end">إجمالي الخصم / Total Discount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="state.customers.length === 0">
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">لا توجد بيانات / No data</td>
+                                </tr>
+                            </t>
+                            <t t-foreach="state.customers" t-as="c" t-key="c.customer_name">
+                                <tr>
+                                    <td><i class="fa fa-briefcase text-muted me-1"/> <t t-esc="c.customer_name"/></td>
+                                    <td class="text-end"><t t-esc="c.entry_count"/></td>
+                                    <td class="text-end fw-bold"><t t-esc="formatCurrency(c.total_discount)"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                        <tfoot t-if="state.customers.length > 0">
+                            <tr class="eh_table_footer">
+                                <td class="fw-bold">الإجمالي / Total</td>
+                                <td class="text-end fw-bold">
+                                    <t t-esc="state.customers.reduce((s,c) => s + c.entry_count, 0)"/>
+                                </td>
+                                <td class="text-end fw-bold">
+                                    <t t-esc="formatCurrency(state.customers.reduce((s,c) => s + c.total_discount, 0))"/>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</t>
+
+</templates>

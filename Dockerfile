@@ -171,8 +171,8 @@ RUN apt-get update && \
         redis \
         xlsxwriter \
         num2words \
-        python-stdnum && \
-        openpyxl \
+        python-stdnum \
+        openpyxl && \
     # Cleanup
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

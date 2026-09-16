@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_eh_discount_purge_wizard_form" model="ir.ui.view">
+        <field name="name">eh.discount.purge.wizard.form</field>
+        <field name="model">eh.discount.purge.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Purge Discount Data (TESTING ONLY)">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Warning!</strong> This will reverse any posted journal entries, 
+                    cancel them, and then permanently delete the discount records. 
+                    This should ONLY be used in testing environments!
+                </div>
+                <sheet>
+                    <group>
+                        <field name="purge_mode" widget="radio"/>
+                        <field name="program_id" invisible="purge_mode != 'program'" required="purge_mode == 'program'"/>
+                        <field name="delete_programs"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_purge" string="Confirm Purge" type="object" class="btn-danger"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_eh_discount_purge_wizard" model="ir.actions.act_window">
+        <field name="name">Purge Discount Data</field>
+        <field name="res_model">eh.discount.purge.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

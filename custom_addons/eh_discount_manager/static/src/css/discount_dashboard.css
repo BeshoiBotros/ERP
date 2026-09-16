@@ -1,0 +1,225 @@
+/* === Discount Dashboard Styles === */
+
+.eh_discount_dashboard {
+    padding: 24px;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* --- Header --- */
+.eh_dash_header {
+    margin-bottom: 20px;
+}
+
+.eh_dash_title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.eh_dash_title i {
+    color: #7c3aed;
+    margin-inline-end: 8px;
+}
+
+/* --- Filters --- */
+.eh_dash_filters {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+.eh_filter_group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.eh_filter_item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.eh_filter_item label {
+    font-weight: 600;
+    font-size: .85rem;
+    color: #555;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.eh_filter_item input {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    font-size: .9rem;
+}
+
+.eh_filter_actions {
+    display: flex;
+    gap: 8px;
+    margin-inline-start: auto;
+}
+
+.eh_filter_actions .btn {
+    border-radius: 8px;
+    font-size: .85rem;
+    padding: 6px 16px;
+}
+
+/* --- Loading --- */
+.eh_dash_loading {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+    color: #7c3aed;
+}
+
+/* --- KPI Cards --- */
+.eh_kpi_row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.eh_kpi_card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    transition: transform .15s ease, box-shadow .15s ease;
+    border-inline-start: 4px solid transparent;
+}
+
+.eh_kpi_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,.1);
+}
+
+.eh_kpi_icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.eh_kpi_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.eh_kpi_value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.2;
+}
+
+.eh_kpi_label {
+    font-size: .78rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+/* Card color variants */
+.eh_kpi_total {
+    border-color: #7c3aed;
+}
+.eh_kpi_total .eh_kpi_icon {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.eh_kpi_company {
+    border-color: #dc2626;
+}
+.eh_kpi_company .eh_kpi_icon {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.eh_kpi_vendor {
+    border-color: #ea580c;
+}
+.eh_kpi_vendor .eh_kpi_icon {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.eh_kpi_programs {
+    border-color: #059669;
+}
+.eh_kpi_programs .eh_kpi_icon {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+/* --- Section --- */
+.eh_dash_section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.eh_section_title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.eh_section_title i {
+    color: #7c3aed;
+    margin-inline-end: 6px;
+}
+
+/* --- Tables --- */
+.eh_dash_table {
+    margin-bottom: 0;
+}
+
+.eh_dash_table thead th {
+    background: #fafafa;
+    font-size: .82rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    border-bottom: 2px solid #eee;
+    padding: 10px 12px;
+}
+
+.eh_dash_table tbody td {
+    padding: 10px 12px;
+    font-size: .9rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.eh_dash_table tbody tr:hover {
+    background: #faf5ff;
+}
+
+.eh_table_footer td {
+    background: #fafafa;
+    border-top: 2px solid #eee;
+    padding: 10px 12px;
+    font-size: .9rem;
+}

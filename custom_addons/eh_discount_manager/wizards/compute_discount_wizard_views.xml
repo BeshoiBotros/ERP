@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_eh_discount_compute_wizard_form" model="ir.ui.view">
+        <field name="name">eh.discount.compute.wizard.form</field>
+        <field name="model">eh.discount.compute.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Compute Discount">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="program_id" readonly="context.get('default_program_id')"/>
+                            <field name="customer_id"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="total_invoiced" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="company_discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="vendor_discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Vendor Distribution">
+                            <p class="text-muted">
+                                Vendors are extracted from product sellers or purchase orders linked to the invoices.
+                                You can manually add, remove, or adjust the percentage and amounts below. 
+                                Click "Recalculate" if you change amounts to update percentages.
+                            </p>
+                            <field name="vendor_line_ids">
+                                <tree editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="invoiced_amount" sum="Total"/>
+                                    <field name="percentage" widget="percentage" sum="Total %"/>
+                                    <field name="discount_amount" sum="Total Discount"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Invoices Included">
+                            <field name="invoice_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_create_entry" string="Create Discount Entry" type="object" class="btn-primary"/>
+                    <button name="action_recalculate" string="Recalculate" type="object" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_eh_discount_compute_wizard" model="ir.actions.act_window">
+        <field name="name">Compute Discount</field>
+        <field name="res_model">eh.discount.compute.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_program_id': active_id}</field>
+    </record>
+</odoo>
