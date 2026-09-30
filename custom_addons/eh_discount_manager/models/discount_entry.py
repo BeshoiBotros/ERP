@@ -89,6 +89,7 @@ class EhDiscountEntry(models.Model):
         }))
         
         # 3. Vendor lines (Debit) - Vendor Share
+        vendor_debit_indices = []  # track indices for rounding adjustment
         for vline in self.vendor_line_ids:
             if vline.discount_amount <= 0:
                 continue
@@ -102,6 +103,36 @@ class EhDiscountEntry(models.Model):
                 'debit': vline.discount_amount,
                 'credit': 0.0,
             }))
+            vendor_debit_indices.append(len(line_vals) - 1)
+        
+        # 4. Fallback: if no vendor lines but vendor share > 0, book it to expense account
+        if not vendor_debit_indices and self.vendor_total_discount > 0:
+            line_vals.append((0, 0, {
+                'name': 'Unallocated Vendor Discount Share: %s' % self.name,
+                'account_id': self.program_id.discount_expense_account_id.id,
+                'debit': self.vendor_total_discount,
+                'credit': 0.0,
+            }))
+            vendor_debit_indices.append(len(line_vals) - 1)
+        
+        # 5. Fix rounding: adjust last vendor debit line to ensure balance
+        total_debit = sum(l[2]['debit'] for l in line_vals)
+        total_credit = sum(l[2]['credit'] for l in line_vals)
+        rounding_diff = round(total_credit - total_debit, 2)
+        
+        if abs(rounding_diff) > 0 and abs(rounding_diff) <= 0.10 and vendor_debit_indices:
+            # Adjust last vendor debit line to absorb the rounding difference
+            last_idx = vendor_debit_indices[-1]
+            line_vals[last_idx][2]['debit'] = round(line_vals[last_idx][2]['debit'] + rounding_diff, 2)
+        
+        # 6. Final validation
+        total_debit = sum(l[2]['debit'] for l in line_vals)
+        total_credit = sum(l[2]['credit'] for l in line_vals)
+        if abs(total_debit - total_credit) > 0.01:
+            raise UserError(
+                "Cannot create journal entry: debits (%.2f) != credits (%.2f). "
+                "Please check vendor distribution." % (total_debit, total_credit)
+            )
             
         return {
             'move_type': 'entry',
