@@ -48,7 +48,17 @@ class EhDiscountComputeWizard(models.TransientModel):
         invoices = self.env['account.move'].search(domain)
         self.invoice_ids = [(6, 0, invoices.ids)]
         
-        self.total_invoiced = sum(invoices.mapped('amount_untaxed'))
+        self._recalculate_all_totals()
+
+    @api.onchange('invoice_ids')
+    def _onchange_invoice_ids(self):
+        self._recalculate_all_totals()
+
+    def _recalculate_all_totals(self):
+        if not self.program_id:
+            return
+
+        self.total_invoiced = sum(self.invoice_ids.mapped('amount_untaxed'))
         
         self.total_discount = self.total_invoiced * (self.program_id.total_discount_pct / 100.0)
         self.company_discount = self.total_invoiced * (self.program_id.company_share_pct / 100.0)
@@ -56,7 +66,7 @@ class EhDiscountComputeWizard(models.TransientModel):
 
         # Compute vendor amounts from invoice lines
         vendor_totals = {}
-        for inv in invoices:
+        for inv in self.invoice_ids:
             for line in inv.invoice_line_ids:
                 if line.product_id and line.price_subtotal > 0:
                     # Try to find vendor from product's sellers or PO lines (if any)
@@ -121,19 +131,7 @@ class EhDiscountComputeWizard(models.TransientModel):
 
     def action_create_entry(self):
         if not self.invoice_ids:
-            # Fallback in case invoice_ids is not passed from UI due to readonly
-            domain = [
-                ('partner_id', '=', self.program_id.customer_id.id),
-                ('state', '=', 'posted'),
-                ('move_type', '=', 'out_invoice'),
-                ('invoice_date', '>=', self.program_id.date_from),
-                ('invoice_date', '<=', self.program_id.date_to),
-            ]
-            invoices = self.env['account.move'].search(domain)
-            self.invoice_ids = [(6, 0, invoices.ids)]
-            
-        if not self.invoice_ids:
-            raise UserError("No invoices found for the selected program.")
+            raise UserError("Please select at least one invoice.")
 
         # Recalculate totals from invoices (backend-safe, ignores readonly UI values)
         total_invoiced = sum(self.invoice_ids.mapped('amount_untaxed'))

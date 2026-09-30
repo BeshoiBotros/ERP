@@ -37,7 +37,7 @@
                             </field>
                         </page>
                         <page string="Invoices Included">
-                            <field name="invoice_ids" readonly="1"/>
+                            <field name="invoice_ids"/>
                         </page>
                     </notebook>
                 </sheet>
