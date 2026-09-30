@@ -4,6 +4,12 @@
     padding: 24px;
     background: #f8f9fa;
     min-height: 100vh;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.eh_discount_dashboard.o_action {
+    overflow: auto !important;
 }
 
 /* --- Header --- */
