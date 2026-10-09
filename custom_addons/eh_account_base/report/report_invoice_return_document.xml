@@ -6,109 +6,106 @@
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 
-                <style>
-                    .custom-invoice-container {
-                        direction: rtl;
-                        text-align: right;
-                        font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
-                        font-size: 22px !important; 
-                        font-weight: 900 !important;
-                        color: #000;
-                    }
-                    .custom-invoice-container * {
-                        font-weight: 900 !important;
-                    }
-                    
-                    .company-header-custom {
-                        text-align: right;
-                        margin-bottom: 30px;
-                        line-height: 1.1; 
-                    }
-                    .company-header-custom h1 {
-                        font-size: 46px !important;
-                        font-weight: 900 !important;
-                        margin: 0;
-                        padding: 0;
-                        color: #000;
-                    }
-                    .company-header-custom h2 {
-                        font-size: 32px !important;
-                        font-weight: 900 !important;
-                        margin: 0;
-                        padding: 0;
-                        padding-top: 5px;
-                        color: #000;
-                    }
-
-                    /* جدول بيانات العميل - تم تعديل الحدود لتكون صلبة وسميكة */
-                    .header-info-table {
-                        width: 100%;
-                        margin-bottom: 25px;
-                        border-collapse: collapse;
-                    }
-                    .header-info-table td {
-                        padding: 15px 10px;
-                        vertical-align: middle !important;
-                        border: 3px solid black !important; /* خط متصل وسميك بدلاً من المتقطع */
-                    }
-                    
-                    .header-info-table .label-cell {
-                        width: 15%;
-                        white-space: nowrap; 
-                        text-align: right;
-                        font-size: 26px !important; 
-                        font-weight: 900 !important;
-                        color: #000;
-                        background-color: #f9f9f9; /* خلفية رمادية فاتحة جداً لتمييز العناوين */
-                    }
-                    .header-info-table .value-cell {
-                        width: 35%;
-                        text-align: center;
-                        font-size: 26px !important;
-                        font-weight: 900 !important;
-                    }
-
-                    .lines-table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin-bottom: 25px;
-                    }
-                    .lines-table th, .lines-table td {
-                        border: 3px solid black !important;
-                        padding: 14px;
-                        text-align: center;
-                        vertical-align: middle;
-                    }
-                    .lines-table th {
-                        background-color: #f2f2f2;
-                        font-size: 24px !important;
-                        font-weight: 900 !important;
-                    }
-                    .lines-table td {
-                        font-size: 22px !important;
-                        font-weight: 900 !important;
-                    }
-                    
-                    .receipt-box {
-                        border: 3px solid black;
-                        padding: 25px;
-                        margin-top: 35px;
-                        border-radius: 5px;
-                    }
-                    .receipt-box span {
-                        font-size: 26px !important;
-                        font-weight: 900 !important;
-                    }
-                </style>
-
                 <div class="page custom-invoice-container">
+                    <style>
+                        .custom-invoice-container {
+                            direction: rtl;
+                            text-align: right;
+                            font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+                            font-size: 22px !important; 
+                            font-weight: 900 !important;
+                            color: #000;
+                        }
+                        .custom-invoice-container * {
+                            font-weight: 900 !important;
+                        }
+                        
+                        .company-header-custom {
+                            text-align: right;
+                            margin-bottom: 30px;
+                            line-height: 1.1; 
+                        }
+                        .company-header-custom h1 {
+                            font-size: 46px !important;
+                            font-weight: 900 !important;
+                            margin: 0;
+                            padding: 0;
+                            color: #000;
+                        }
+                        .company-header-custom h2 {
+                            font-size: 32px !important;
+                            font-weight: 900 !important;
+                            margin: 0;
+                            padding: 0;
+                            padding-top: 5px;
+                            color: #000;
+                        }
+
+                        /* جدول بيانات العميل - تم تعديل الحدود لتكون صلبة وسميكة */
+                        .header-info-table {
+                            width: 100%;
+                            margin-bottom: 25px;
+                            border-collapse: collapse;
+                        }
+                        .header-info-table td {
+                            padding: 15px 10px;
+                            vertical-align: middle !important;
+                            border: 3px solid black !important; /* خط متصل وسميك بدلاً من المتقطع */
+                        }
+                        
+                        .header-info-table .label-cell {
+                            width: 15%;
+                            white-space: nowrap; 
+                            text-align: right;
+                            font-size: 26px !important; 
+                            font-weight: 900 !important;
+                            color: #000;
+                            background-color: #f9f9f9; /* خلفية رمادية فاتحة جداً لتمييز العناوين */
+                        }
+                        .header-info-table .value-cell {
+                            width: 35%;
+                            text-align: center;
+                            font-size: 26px !important;
+                            font-weight: 900 !important;
+                        }
+
+                        .lines-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-bottom: 25px;
+                        }
+                        .lines-table th, .lines-table td {
+                            border: 3px solid black !important;
+                            padding: 14px;
+                            text-align: center;
+                            vertical-align: middle;
+                        }
+                        .lines-table th {
+                            background-color: #f2f2f2;
+                            font-size: 24px !important;
+                            font-weight: 900 !important;
+                        }
+                        .lines-table td {
+                            font-size: 22px !important;
+                            font-weight: 900 !important;
+                        }
+                        
+                        .receipt-box {
+                            border: 3px solid black;
+                            padding: 25px;
+                            margin-top: 35px;
+                            border-radius: 5px;
+                        }
+                        .receipt-box span {
+                            font-size: 26px !important;
+                            font-weight: 900 !important;
+                        }
+                    </style>
                     
                     <h2 class="text-center mt-4 mb-4">
                         <span>إشعار مرتجع</span>
                         <span t-if="o.name != '/'" t-field="o.name"/>
                     </h2>
-
-                    <div id="informations" class="d-none"/>
 
                     <!-- جدول البيانات العلوية بتنسيق الشبكة المغلقة -->
                     <table class="header-info-table">
@@ -159,23 +156,19 @@
                         </tbody>
                     </table>
 
-                    <div id="right-elements" class="row d-none"/>
-
                     <div class="receipt-box">
-                        <div class="row align-items-center">
-                            <div class="col-6">
-                                <div class="d-flex align-items-center">
+                        <table style="width: 100%; border: none;">
+                            <tr>
+                                <td style="width: 50%; vertical-align: middle; text-align: right;">
                                     <span class="me-3">عدد الكراتين : </span>
-                                    <div style="width: 120px; height: 50px; border: 3px solid black; border-radius: 5px;"/>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex align-items-center" style="direction: rtl;">
+                                    <div style="display: inline-block; width: 120px; height: 50px; border: 3px solid black; border-radius: 5px; vertical-align: middle; margin-right: 10px;"/>
+                                </td>
+                                <td style="width: 50%; vertical-align: middle; text-align: right; direction: rtl;">
                                     <span class="me-3">توقيع المستلم : </span>
-                                    <div style="flex-grow: 1; border-bottom: 3px dashed black; height: 30px; margin-left: 20px;"/>
-                                </div>
-                            </div>
-                        </div>
+                                    <div style="display: inline-block; width: 60%; border-bottom: 3px dashed black; height: 30px; margin-right: 10px; vertical-align: bottom;"/>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                 </div>
