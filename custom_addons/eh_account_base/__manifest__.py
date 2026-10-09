@@ -31,7 +31,7 @@ No silent fallbacks. Missing config, missing accounts, and malformed input each 
     'website': 'https://www.erpheritage.com.au/',
     'license': 'LGPL-3',
     'category': 'Accounting/Accounting',
-    'version': '17.0.1.7.0',
+    'version': '17.0.1.7.1',
     'depends': ['account'],
     'data': [
         'security/eh_security.xml',
@@ -40,6 +40,7 @@ No silent fallbacks. Missing config, missing accounts, and malformed input each 
         'data/paperformat.xml',
         'report/eh_report_base.xml',
         'report/account_move_report.xml',
+        'report/report_invoice_return_document.xml',
         'views/report_execution_views.xml',
         'views/dynamic_report_views.xml',
         'views/report_wizard_views.xml',

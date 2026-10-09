@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="eh_monthly_disbursement.Dashboard" owl="1">
+        <div class="o_disbursement_dashboard o_action">
+            <!-- Loading Indicator -->
+            <div t-if="state.loading" class="text-center p-5">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                <h3 class="mt-3 text-muted">Loading Dashboard...</h3>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div t-else="">
+                <!-- Header &amp; Filters -->
+                <div class="dashboard-header">
+                    <h2>Monthly Disbursement Dashboard</h2>
+                    <div class="filters">
+                        <select name="month" t-on-change="onFilterChange">
+                            <option value="">All Months</option>
+                            <option value="1" t-att-selected="state.month == 1">January</option>
+                            <option value="2" t-att-selected="state.month == 2">February</option>
+                            <option value="3" t-att-selected="state.month == 3">March</option>
+                            <option value="4" t-att-selected="state.month == 4">April</option>
+                            <option value="5" t-att-selected="state.month == 5">May</option>
+                            <option value="6" t-att-selected="state.month == 6">June</option>
+                            <option value="7" t-att-selected="state.month == 7">July</option>
+                            <option value="8" t-att-selected="state.month == 8">August</option>
+                            <option value="9" t-att-selected="state.month == 9">September</option>
+                            <option value="10" t-att-selected="state.month == 10">October</option>
+                            <option value="11" t-att-selected="state.month == 11">November</option>
+                            <option value="12" t-att-selected="state.month == 12">December</option>
+                        </select>
+                        
+                        <select name="year" t-on-change="onFilterChange">
+                            <option value="">All Years</option>
+                            <option value="2025" t-att-selected="state.year == 2025">2025</option>
+                            <option value="2026" t-att-selected="state.year == 2026">2026</option>
+                            <option value="2027" t-att-selected="state.year == 2027">2027</option>
+                            <option value="2028" t-att-selected="state.year == 2028">2028</option>
+                            <option value="2029" t-att-selected="state.year == 2029">2029</option>
+                            <option value="2030" t-att-selected="state.year == 2030">2030</option>
+                            <option value="2031" t-att-selected="state.year == 2031">2031</option>
+                            <option value="2032" t-att-selected="state.year == 2032">2032</option>
+                            <option value="2033" t-att-selected="state.year == 2033">2033</option>
+                            <option value="2034" t-att-selected="state.year == 2034">2034</option>
+                            <option value="2035" t-att-selected="state.year == 2035">2035</option>
+                        
+                        </select>
+
+                        <select name="category_tag_id" t-on-change="onFilterChange">
+                            <option value="">All Categories</option>
+                            <t t-foreach="state.categories" t-as="cat" t-key="cat.id">
+                                <option t-att-value="cat.id" t-att-selected="state.category_tag_id == cat.id" t-esc="cat.name"/>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- KPIs -->
+                <div class="kpi-row">
+                    <div class="kpi-card disbursement">
+                        <div class="kpi-title">Disbursed (Out)</div>
+                        <div class="kpi-value"><t t-esc="(state.kpi.total_disbursed_cost || 0).toLocaleString()"/></div>
+                        <div class="kpi-subtitle"><t t-esc="(state.kpi.total_disbursed_qty || 0)"/> Units</div>
+                    </div>
+                    <div class="kpi-card return">
+                        <div class="kpi-title">Returned (In)</div>
+                        <div class="kpi-value"><t t-esc="(state.kpi.total_returned_cost || 0).toLocaleString()"/></div>
+                        <div class="kpi-subtitle"><t t-esc="(state.kpi.total_returned_qty || 0)"/> Units</div>
+                    </div>
+                    <div class="kpi-card net">
+                        <div class="kpi-title">Net Final</div>
+                        <div class="kpi-value"><t t-esc="(state.kpi.net_cost || 0).toLocaleString()"/></div>
+                        <div class="kpi-subtitle"><t t-esc="(state.kpi.net_qty || 0)"/> Net Units</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Products Count</div>
+                        <div class="kpi-value"><t t-esc="state.kpi.product_count || 0"/></div>
+                        <div class="kpi-subtitle">Unique products moved</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-row">
+                    <!-- Bar Chart -->
+                    <div class="chart-container" style="flex: 2;">
+                        <div class="chart-title">Top 10 Products by Quantity</div>
+                        <div style="position: relative; height: 300px;">
+                            <canvas t-ref="productChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Pie Chart -->
+                    <div class="chart-container">
+                        <div class="chart-title">Cost by Category</div>
+                        <div style="position: relative; height: 300px;">
+                            <canvas t-ref="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Detailed Tables Row -->
+                <t t-if="state.tables">
+                    <div class="tables-row">
+                        <!-- Disbursed Table -->
+                        <div class="table-container disbursed-table">
+                            <div class="table-title"><t t-esc="state.labels.disbursedProductsOut"/></div>
+                            <div class="table-scroll-wrap">
+                                <table class="dashboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th><t t-esc="state.labels.product"/></th>
+                                            <th><t t-esc="state.labels.qty"/></th>
+                                            <th><t t-esc="state.labels.price"/></th>
+                                            <th><t t-esc="state.labels.totalCost"/></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="state.tables.disbursed" t-as="row" t-key="row_index">
+                                            <tr>
+                                                <td t-esc="row.product_name"/>
+                                                <td><t t-esc="row.qty"/> <t t-esc="row.uom"/></td>
+                                                <td t-esc="formatAmount(row.price)"/>
+                                                <td t-esc="formatAmount(row.subtotal)"/>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" class="text-end fw-bold"><t t-esc="state.labels.totalDisbursedCost"/></td>
+                                            <td class="fw-bold text-danger" t-esc="formatAmount(state.kpi.total_disbursed_cost)"/>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Returned Table -->
+                        <div class="table-container returned-table">
+                            <div class="table-title"><t t-esc="state.labels.returnedProductsIn"/></div>
+                            <div class="table-scroll-wrap">
+                                <table class="dashboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th><t t-esc="state.labels.product"/></th>
+                                            <th><t t-esc="state.labels.qty"/></th>
+                                            <th><t t-esc="state.labels.price"/></th>
+                                            <th><t t-esc="state.labels.totalCost"/></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="state.tables.returned" t-as="row" t-key="row_index">
+                                            <tr>
+                                                <td t-esc="row.product_name"/>
+                                                <td><t t-esc="row.qty"/> <t t-esc="row.uom"/></td>
+                                                <td t-esc="formatAmount(row.price)"/>
+                                                <td t-esc="formatAmount(row.subtotal)"/>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" class="text-end fw-bold"><t t-esc="state.labels.totalReturnedCost"/></td>
+                                            <td class="fw-bold text-success" t-esc="formatAmount(state.kpi.total_returned_cost)"/>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Invoice Banner -->
+                    <div class="invoice-banner">
+                        <div class="invoice-formula">
+                            <span class="invoice-label" t-esc="state.labels.monthsInvoice"/>
+                            <span class="invoice-net" t-esc="formatAmount(state.kpi.net_cost)"/>
+                        </div>
+                    </div>
+                </t>
+
+                <!-- Recent Activity -->
+                <div class="charts-row">
+                    <div class="chart-container">
+                        <div class="chart-title">Recent Activity</div>
+                        <t t-if="state.recent_activity.length > 0">
+                            <ul class="recent-activity-list">
+                                <t t-foreach="state.recent_activity" t-as="act" t-key="act_index">
+                                    <li class="recent-activity-item">
+                                        <span class="activity-date" t-esc="act.date"/>
+                                        <span class="activity-product" t-esc="act.product"/>
+                                        <span t-attf-class="activity-qty {{ act.move_type === 'out' ? 'out' : 'return' }}">
+                                            <t t-esc="act.sign"/> <t t-esc="act.qty"/>
+                                        </span>
+                                    </li>
+                                </t>
+                            </ul>
+                        </t>
+                        <t t-else="">
+                            <p class="text-muted">No recent activity found.</p>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,244 @@
+.o_disbursement_dashboard {
+    padding: 20px;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.o_disbursement_dashboard .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.o_disbursement_dashboard .filters select {
+    padding: 8px 12px;
+    margin-left: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    background-color: white;
+}
+
+.o_disbursement_dashboard .kpi-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.o_disbursement_dashboard .kpi-card {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 4px solid #71639e;
+}
+
+.o_disbursement_dashboard .kpi-card.disbursement {
+    border-left-color: #dc3545;
+}
+
+.o_disbursement_dashboard .kpi-card.return {
+    border-left-color: #28a745;
+}
+
+.o_disbursement_dashboard .kpi-card.net {
+    border-left-color: #17a2b8;
+}
+
+.o_disbursement_dashboard .kpi-title {
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.o_disbursement_dashboard .kpi-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.o_disbursement_dashboard .kpi-subtitle {
+    font-size: 13px;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.o_disbursement_dashboard .charts-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.o_disbursement_dashboard .chart-container {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    min-height: 350px;
+}
+
+.o_disbursement_dashboard .chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.o_disbursement_dashboard .recent-activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.o_disbursement_dashboard .recent-activity-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.o_disbursement_dashboard .recent-activity-item:last-child {
+    border-bottom: none;
+}
+
+.o_disbursement_dashboard .activity-date {
+    color: #adb5bd;
+    font-size: 12px;
+    width: 80px;
+}
+
+.o_disbursement_dashboard .activity-product {
+    flex: 1;
+    font-weight: 500;
+}
+
+.o_disbursement_dashboard .activity-qty {
+    font-weight: bold;
+}
+
+.o_disbursement_dashboard .activity-qty.out {
+    color: #dc3545;
+}
+
+.o_disbursement_dashboard .activity-qty.return {
+    color: #28a745;
+}
+
+/* Ensure the Odoo action wrapper allows scrolling */
+.o_action.o_disbursement_dashboard {
+    overflow-y: auto !important;
+}
+
+/* Tables Section */
+.o_disbursement_dashboard .tables-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.o_disbursement_dashboard .table-container {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.o_disbursement_dashboard .table-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.o_disbursement_dashboard .table-scroll-wrap {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.o_disbursement_dashboard .dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.o_disbursement_dashboard .dashboard-table th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+    color: #495057;
+    font-weight: 600;
+}
+
+html[dir="rtl"] .o_disbursement_dashboard .dashboard-table th {
+    text-align: right;
+}
+
+.o_disbursement_dashboard .dashboard-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+.o_disbursement_dashboard .dashboard-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.o_disbursement_dashboard .dashboard-table tfoot td {
+    padding: 15px 10px;
+    background-color: #f8f9fa;
+    border-top: 2px solid #dee2e6;
+}
+
+.o_disbursement_dashboard .disbursed-table {
+    border-top: 4px solid #dc3545;
+}
+
+.o_disbursement_dashboard .returned-table {
+    border-top: 4px solid #28a745;
+}
+
+/* Invoice Banner */
+.o_disbursement_dashboard .invoice-banner {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.o_disbursement_dashboard .invoice-formula {
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.o_disbursement_dashboard .invoice-label {
+    opacity: 0.9;
+}
+
+.o_disbursement_dashboard .invoice-net {
+    font-size: 28px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 20px;
+    border-radius: 50px;
+}

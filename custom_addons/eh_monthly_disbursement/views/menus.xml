@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_monthly_disbursement_root" 
+              name="Monthly Disbursement" 
+              parent="account.menu_finance_entries" 
+              sequence="25"/>
+
+    <!-- Dashboard -->
+    <menuitem id="menu_monthly_disbursement_dashboard" 
+              name="Dashboard" 
+              parent="menu_monthly_disbursement_root" 
+              action="action_eh_disbursement_dashboard" 
+              sequence="10"/>
+
+    <!-- Records -->
+    <menuitem id="menu_monthly_disbursement_records" 
+              name="Disbursement Records" 
+              parent="menu_monthly_disbursement_root" 
+              action="action_eh_monthly_disbursement" 
+              sequence="20"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_monthly_disbursement_config_root"
+              name="Monthly Disbursement"
+              parent="account.menu_finance_configuration"
+              sequence="25"/>
+
+    <menuitem id="menu_product_category_tag" 
+              name="Category Tags" 
+              parent="menu_monthly_disbursement_config_root" 
+              action="action_eh_product_category_tag" 
+              sequence="10"/>
+</odoo>

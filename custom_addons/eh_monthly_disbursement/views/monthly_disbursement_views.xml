@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_monthly_disbursement_form" model="ir.ui.view">
+        <field name="name">eh.monthly.disbursement.form</field>
+        <field name="model">eh.monthly.disbursement</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Disbursement">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" invisible="state != 'draft'" class="oe_highlight"/>
+                    <button name="action_done" type="object" string="Mark as Done" invisible="state != 'confirmed'"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state not in ('draft', 'confirmed')"/>
+                    <button name="action_draft" type="object" string="Reset to Draft" invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="month"/>
+                            <field name="year"/>
+                            <field name="category_tag_id"/>
+                        </group>
+                        <group>
+                            <field name="date_from" invisible="1"/>
+                            <field name="date_to" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- KPI Summary -->
+                    <group string="Summary" col="3">
+                        <group>
+                            <field name="total_disbursed_cost" widget="monetary" decoration-danger="1"/>
+                            <field name="total_disbursed_qty"/>
+                        </group>
+                        <group>
+                            <field name="total_returned_cost" widget="monetary" decoration-success="1"/>
+                            <field name="total_returned_qty"/>
+                        </group>
+                        <group>
+                            <field name="net_cost" widget="monetary" decoration-bf="1" decoration-info="1"/>
+                            <field name="net_qty" decoration-bf="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="📦 Disbursements (Out)">
+                            <field name="disbursement_line_ids" context="{'default_move_type': 'out'}" readonly="state in ('done', 'cancelled')">
+                                <tree editable="bottom">
+                                    <field name="move_type" column_invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="product_id"/>
+                                    <field name="purchase_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="qty"/>
+                                    <field name="uom_id"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="subtotal" widget="monetary"/>
+                                    <field name="notes" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="🔄 Returns (In)">
+                            <field name="return_line_ids" context="{'default_move_type': 'return'}" readonly="state in ('done', 'cancelled')">
+                                <tree editable="bottom">
+                                    <field name="move_type" column_invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="product_id"/>
+                                    <field name="purchase_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="qty"/>
+                                    <field name="uom_id"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="subtotal" widget="monetary"/>
+                                    <field name="notes" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_monthly_disbursement_tree" model="ir.ui.view">
+        <field name="name">eh.monthly.disbursement.tree</field>
+        <field name="model">eh.monthly.disbursement</field>
+        <field name="arch" type="xml">
+            <tree string="Monthly Disbursements" decoration-info="state == 'draft'" decoration-success="state == 'done'" decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="category_tag_id"/>
+                <field name="total_disbursed_cost" sum="Total Disbursed"/>
+                <field name="total_returned_cost" sum="Total Returned"/>
+                <field name="net_cost" sum="Net Cost" decoration-bf="1"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'done'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_monthly_disbursement_search" model="ir.ui.view">
+        <field name="name">eh.monthly.disbursement.search</field>
+        <field name="model">eh.monthly.disbursement</field>
+        <field name="arch" type="xml">
+            <search string="Search Disbursements">
+                <field name="name"/>
+                <field name="year"/>
+                <field name="category_tag_id"/>
+                
+                <separator/>
+                <filter string="Current Year" name="current_year" domain="[('year', '=', context_today().strftime('%Y'))]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Month" name="group_month" context="{'group_by': 'month'}"/>
+                    <filter string="Year" name="group_year" context="{'group_by': 'year'}"/>
+                    <filter string="Category" name="group_category" context="{'group_by': 'category_tag_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_eh_monthly_disbursement" model="ir.actions.act_window">
+        <field name="name">Monthly Disbursements</field>
+        <field name="res_model">eh.monthly.disbursement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_monthly_disbursement_search"/>
+        <field name="context">{'search_default_current_year': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Monthly Disbursement record
+            </p>
+        </field>
+    </record>
+</odoo>

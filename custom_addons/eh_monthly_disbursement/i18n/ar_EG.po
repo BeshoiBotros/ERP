@@ -1,0 +1,427 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eh_monthly_disbursement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-09 11:00+0000\n"
+"PO-Revision-Date: 2026-10-09 12:00+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: ar_001\n"
+
+#. module: eh_monthly_disbursement
+#: model:ir.actions.act_window,name:eh_monthly_disbursement.action_eh_monthly_disbursement
+#: model:ir.ui.menu,name:eh_monthly_disbursement.menu_monthly_disbursement_records
+msgid "Monthly Disbursements"
+msgstr "المنصرف الشهري"
+
+#. module: eh_monthly_disbursement
+#: model:ir.actions.act_window,name:eh_monthly_disbursement.action_eh_product_category_tag
+#: model:ir.ui.menu,name:eh_monthly_disbursement.menu_product_category_tag
+msgid "Category Tags"
+msgstr "تصنيفات الأصناف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.actions.client,name:eh_monthly_disbursement.action_eh_disbursement_dashboard
+#: model:ir.ui.menu,name:eh_monthly_disbursement.menu_monthly_disbursement_dashboard
+msgid "Dashboard"
+msgstr "لوحة المعلومات"
+
+#. module: eh_monthly_disbursement
+#: model:ir.ui.menu,name:eh_monthly_disbursement.menu_monthly_disbursement_root
+#: model:ir.ui.menu,name:eh_monthly_disbursement.menu_monthly_disbursement_config_root
+msgid "Monthly Disbursement"
+msgstr "المنصرف شهرياً"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "Mark as Done"
+msgstr "تحديد كمنتهي"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "Reset to Draft"
+msgstr "إعادة كمسودة"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "📦 Disbursements (Out)"
+msgstr "📦 المنصرف (خارج)"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "🔄 Returns (In)"
+msgstr "🔄 المرتجع (داخل)"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: eh_monthly_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_monthly_disbursement.view_monthly_disbursement_form
+msgid "Summary"
+msgstr "الملخص"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model,name:eh_monthly_disbursement.model_eh_monthly_disbursement
+msgid "Monthly Disbursement"
+msgstr "المنصرف الشهري"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model,name:eh_monthly_disbursement.model_eh_monthly_disbursement_line
+msgid "Monthly Disbursement Line"
+msgstr "سطر المنصرف الشهري"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model,name:eh_monthly_disbursement.model_eh_product_category_tag
+msgid "Product Category Tag"
+msgstr "تصنيف الصنف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__name
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__month
+msgid "Month"
+msgstr "الشهر"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__year
+msgid "Year"
+msgstr "السنة"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__date_from
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__date_to
+msgid "End Date"
+msgstr "تاريخ النهاية"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__category_tag_id
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__category_tag_id
+msgid "Category Tag"
+msgstr "تصنيف الصنف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__currency_id
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__notes
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__total_disbursed_cost
+msgid "Total Disbursed Cost"
+msgstr "إجمالي تكلفة المنصرف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__total_disbursed_qty
+msgid "Total Disbursed Qty"
+msgstr "إجمالي كمية المنصرف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__total_returned_cost
+msgid "Total Returned Cost"
+msgstr "إجمالي تكلفة المرتجع"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__total_returned_qty
+msgid "Total Returned Qty"
+msgstr "إجمالي كمية المرتجع"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__net_cost
+msgid "Net Cost"
+msgstr "صافي التكلفة"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__net_qty
+msgid "Net Quantity"
+msgstr "صافي الكمية"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__move_type
+msgid "Move Type"
+msgstr "نوع الحركة"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__product_categ_id
+msgid "Product Category"
+msgstr "فئة المنتج"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__purchase_price
+msgid "Purchase Price"
+msgstr "سعر الشراء"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__qty
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__uom_id
+msgid "Unit of Measure"
+msgstr "وحدة القياس"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__subtotal
+msgid "Subtotal"
+msgstr "الإجمالي"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement_line__disbursement_id
+msgid "Disbursement"
+msgstr "المنصرف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__state__confirmed
+msgid "Confirmed"
+msgstr "مؤكد"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__state__done
+msgid "Done"
+msgstr "منتهي"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__state__cancelled
+msgid "Cancelled"
+msgstr "ملغي"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement_line__move_type__out
+msgid "Disbursement"
+msgstr "منصرف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement_line__move_type__return
+msgid "Return"
+msgstr "مرتجع"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__1
+msgid "January"
+msgstr "يناير"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__2
+msgid "February"
+msgstr "فبراير"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__3
+msgid "March"
+msgstr "مارس"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__4
+msgid "April"
+msgstr "أبريل"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__5
+msgid "May"
+msgstr "مايو"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__6
+msgid "June"
+msgstr "يونيو"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__7
+msgid "July"
+msgstr "يوليو"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__8
+msgid "August"
+msgstr "أغسطس"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__9
+msgid "September"
+msgstr "سبتمبر"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__10
+msgid "October"
+msgstr "أكتوبر"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__11
+msgid "November"
+msgstr "نوفمبر"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields.selection,name:eh_monthly_disbursement.selection__eh_monthly_disbursement__month__12
+msgid "December"
+msgstr "ديسمبر"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_product_category_tag__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_product_category_tag__code
+msgid "Code"
+msgstr "الرمز"
+
+#. module: eh_monthly_disbursement
+#: model:eh.product.category.tag,name:eh_monthly_disbursement.category_tag_nail_polish
+msgid "Nail Polish"
+msgstr "طلاء أظافر"
+
+#. module: eh_monthly_disbursement
+#: model:eh.product.category.tag,name:eh_monthly_disbursement.category_tag_perfume
+msgid "Perfumes"
+msgstr "عطور"
+
+#. module: eh_monthly_disbursement
+#. Search view filters
+msgid "Current Year"
+msgstr "السنة الحالية"
+
+#. module: eh_monthly_disbursement
+#. Search view group by
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: eh_monthly_disbursement
+#. Search view group by
+msgid "Category"
+msgstr "التصنيف"
+
+#. module: eh_monthly_disbursement
+#: model:ir.model.fields,field_description:eh_monthly_disbursement.field_eh_monthly_disbursement__line_ids
+msgid "Lines"
+msgstr "السطور"
+
+#. module: eh_monthly_disbursement
+#. Dashboard JS _t() strings
+msgid "Monthly Disbursement Dashboard"
+msgstr "لوحة المنصرف الشهري"
+
+#. module: eh_monthly_disbursement
+msgid "All Months"
+msgstr "كل الشهور"
+
+#. module: eh_monthly_disbursement
+msgid "All Years"
+msgstr "كل السنوات"
+
+#. module: eh_monthly_disbursement
+msgid "All Categories"
+msgstr "كل التصنيفات"
+
+#. module: eh_monthly_disbursement
+msgid "Disbursed (Out)"
+msgstr "المنصرف (خارج)"
+
+#. module: eh_monthly_disbursement
+msgid "Returned (In)"
+msgstr "المرتجع (داخل)"
+
+#. module: eh_monthly_disbursement
+msgid "Net Final"
+msgstr "الصافي النهائي"
+
+#. module: eh_monthly_disbursement
+msgid "Products Count"
+msgstr "عدد المنتجات"
+
+#. module: eh_monthly_disbursement
+msgid "Unique products moved"
+msgstr "منتجات مختلفة تم تحريكها"
+
+#. module: eh_monthly_disbursement
+msgid "Units"
+msgstr "وحدة"
+
+#. module: eh_monthly_disbursement
+msgid "Net Units"
+msgstr "صافي الوحدات"
+
+#. module: eh_monthly_disbursement
+msgid "Top 10 Products by Quantity"
+msgstr "أعلى 10 منتجات بالكمية"
+
+#. module: eh_monthly_disbursement
+msgid "Cost by Category"
+msgstr "التكلفة حسب التصنيف"
+
+#. module: eh_monthly_disbursement
+msgid "Recent Activity"
+msgstr "آخر العمليات"
+
+#. module: eh_monthly_disbursement
+msgid "No recent activity found."
+msgstr "لا توجد عمليات حديثة."
+
+#. module: eh_monthly_disbursement
+msgid "Disbursed"
+msgstr "منصرف"
+
+#. module: eh_monthly_disbursement
+msgid "Returned"
+msgstr "مرتجع"
+
+#. module: eh_monthly_disbursement
+#. Disbursement Dashboard action name
+msgid "Disbursement Dashboard"
+msgstr "لوحة المنصرف الشهري"

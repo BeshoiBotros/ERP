@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard Action -->
+    <record id="action_eh_disbursement_dashboard" model="ir.actions.client">
+        <field name="name">Disbursement Dashboard</field>
+        <field name="tag">eh_disbursement_dashboard</field>
+    </record>
+</odoo>

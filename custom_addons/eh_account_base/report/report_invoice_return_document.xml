@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Completely separate template for Credit Notes (Returns) -->
+        <template id="report_invoice_return_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                
+                <style>
+                    .custom-invoice-container {
+                        direction: rtl;
+                        text-align: right;
+                        font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+                        font-size: 22px !important; 
+                        font-weight: 900 !important;
+                        color: #000;
+                    }
+                    .custom-invoice-container * {
+                        font-weight: 900 !important;
+                    }
+                    
+                    .company-header-custom {
+                        text-align: right;
+                        margin-bottom: 30px;
+                        line-height: 1.1; 
+                    }
+                    .company-header-custom h1 {
+                        font-size: 46px !important;
+                        font-weight: 900 !important;
+                        margin: 0;
+                        padding: 0;
+                        color: #000;
+                    }
+                    .company-header-custom h2 {
+                        font-size: 32px !important;
+                        font-weight: 900 !important;
+                        margin: 0;
+                        padding: 0;
+                        padding-top: 5px;
+                        color: #000;
+                    }
+
+                    /* جدول بيانات العميل - تم تعديل الحدود لتكون صلبة وسميكة */
+                    .header-info-table {
+                        width: 100%;
+                        margin-bottom: 25px;
+                        border-collapse: collapse;
+                    }
+                    .header-info-table td {
+                        padding: 15px 10px;
+                        vertical-align: middle !important;
+                        border: 3px solid black !important; /* خط متصل وسميك بدلاً من المتقطع */
+                    }
+                    
+                    .header-info-table .label-cell {
+                        width: 15%;
+                        white-space: nowrap; 
+                        text-align: right;
+                        font-size: 26px !important; 
+                        font-weight: 900 !important;
+                        color: #000;
+                        background-color: #f9f9f9; /* خلفية رمادية فاتحة جداً لتمييز العناوين */
+                    }
+                    .header-info-table .value-cell {
+                        width: 35%;
+                        text-align: center;
+                        font-size: 26px !important;
+                        font-weight: 900 !important;
+                    }
+
+                    .lines-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-bottom: 25px;
+                    }
+                    .lines-table th, .lines-table td {
+                        border: 3px solid black !important;
+                        padding: 14px;
+                        text-align: center;
+                        vertical-align: middle;
+                    }
+                    .lines-table th {
+                        background-color: #f2f2f2;
+                        font-size: 24px !important;
+                        font-weight: 900 !important;
+                    }
+                    .lines-table td {
+                        font-size: 22px !important;
+                        font-weight: 900 !important;
+                    }
+                    
+                    .receipt-box {
+                        border: 3px solid black;
+                        padding: 25px;
+                        margin-top: 35px;
+                        border-radius: 5px;
+                    }
+                    .receipt-box span {
+                        font-size: 26px !important;
+                        font-weight: 900 !important;
+                    }
+                </style>
+
+                <div class="page custom-invoice-container">
+                    
+                    <h2 class="text-center mt-4 mb-4">
+                        <span>إشعار مرتجع</span>
+                        <span t-if="o.name != '/'" t-field="o.name"/>
+                    </h2>
+
+                    <div id="informations" class="d-none"/>
+
+                    <!-- جدول البيانات العلوية بتنسيق الشبكة المغلقة -->
+                    <table class="header-info-table">
+                        <tr>
+                            <td class="label-cell">اسم العميل :</td>
+                            <td class="value-cell"><span t-field="o.partner_id.name"/></td>
+                            <td class="label-cell">التاريخ :</td>
+                            <td class="value-cell"><span t-field="o.invoice_date"/></td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">المنطقة :</td>
+                            <td class="value-cell" colspan="3"><span t-esc="o.partner_id.city or o.partner_id.state_id.name or ''"/></td>
+                        </tr>
+                    </table>
+
+                    <table class="lines-table" name="invoice_line_table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">مسلسل</th>
+                                <th style="width: 42%;">البيان</th>
+                                <th style="width: 15%;">الكمية</th>
+                                <th style="width: 15%;">سعر الوحدة</th>
+                                <th style="width: 20%;">الاجمالي</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="line_index" t-value="1"/>
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+                                <tr t-if="line.display_type == 'product'">
+                                    <td><span t-out="line_index"/></td>
+                                    <td style="text-align: right; padding-right: 15px;"><span t-field="line.name"/></td>
+                                    <td><span t-field="line.quantity"/></td>
+                                    <td><span t-field="line.price_unit"/></td>
+                                    <td><span t-field="line.price_subtotal"/></td>
+                                    <t t-set="line_index" t-value="line_index + 1"/>
+                                </tr>
+                            </t>
+                            
+                            <tr style="font-size: 26px !important; background-color: #f2f2f2;">
+                                <td colspan="4" style="text-align: right; padding-right: 20px;">
+                                    <span class="me-3">الاجمالي: </span>
+                                    <span t-if="o.company_id.display_invoice_amount_total_words" t-field="o.amount_total_words" style="text-decoration: underline;"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.amount_total"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div id="right-elements" class="row d-none"/>
+
+                    <div class="receipt-box">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <span class="me-3">عدد الكراتين : </span>
+                                    <div style="width: 120px; height: 50px; border: 3px solid black; border-radius: 5px;"/>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center" style="direction: rtl;">
+                                    <span class="me-3">توقيع المستلم : </span>
+                                    <div style="flex-grow: 1; border-bottom: 3px dashed black; height: 30px; margin-left: 20px;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+        
+        <!-- We override the main report_invoice routing to use our new template for returns -->
+        <template id="report_invoice_inherit_returns" inherit_id="account.report_invoice">
+            <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">
+                <t t-if="o._get_name_invoice_report() == 'eh_account_base.report_invoice_return_document'"
+                   t-call="eh_account_base.report_invoice_return_document"
+                   t-lang="lang"/>
+                <t t-elif="o._get_name_invoice_report() == 'account.report_invoice_document'"
+                   t-call="account.report_invoice_document"
+                   t-lang="lang"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

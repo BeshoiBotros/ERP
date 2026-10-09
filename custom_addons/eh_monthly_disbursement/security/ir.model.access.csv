@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_eh_product_category_tag_user,eh.product.category.tag.user,model_eh_product_category_tag,base.group_user,1,1,1,1
+access_eh_monthly_disbursement_user,eh.monthly.disbursement.user,model_eh_monthly_disbursement,base.group_user,1,1,1,1
+access_eh_monthly_disbursement_line_user,eh.monthly.disbursement.line.user,model_eh_monthly_disbursement_line,base.group_user,1,1,1,1

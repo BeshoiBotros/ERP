@@ -30,7 +30,9 @@ line belongs to a posted move, and only then, so building up a draft entry
 before action_post does not over-bump.
 """
 
+# pyrefly: ignore [missing-import]
 from odoo import _, api, fields, models
+# pyrefly: ignore [missing-import]
 from odoo.exceptions import UserError
 
 # Fields whose value feeds report figures. A change to any of these on a
@@ -132,6 +134,12 @@ class AccountMove(models.Model):
             if company_ids:
                 self.env['res.company'].sudo()._eh_bump_move_version(company_ids)
         return result
+
+    def _get_name_invoice_report(self):
+        self.ensure_one()
+        if self.move_type == 'out_refund':
+            return 'eh_account_base.report_invoice_return_document'
+        return super()._get_name_invoice_report()
 
 
 class AccountMoveLine(models.Model):
