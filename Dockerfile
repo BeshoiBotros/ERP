@@ -136,6 +136,8 @@ RUN mkdir -p /tmp/addons/extra-addons /tmp/addons/oca-addons && \
     cp -r /tmp/odoomates/om_hr_payroll                      /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_hr_payroll_account              /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_recurring_payments              /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_spreadsheet_account_budget   /tmp/addons/extra-addons/ && \
+
     # ── OCA: MIS Builder ──
     cp -r /tmp/oca-mis-builder/mis_builder         /tmp/addons/oca-addons/ && \
     cp -r /tmp/oca-mis-builder/mis_builder_budget  /tmp/addons/oca-addons/ 2>/dev/null || true && \
