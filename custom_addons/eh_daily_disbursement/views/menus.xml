@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_daily_disbursement_root"
+              name="Daily Disbursement"
+              web_icon="eh_daily_disbursement,static/description/icon.png"
+              sequence="45"
+              groups="group_daily_disbursement_user,eh_account_base.group_eh_auditor"/>
+
+    <menuitem id="menu_daily_disbursement_dashboard"
+              name="Dashboard"
+              parent="menu_daily_disbursement_root"
+              action="action_daily_disbursement_dashboard"
+              sequence="10"/>
+
+    <menuitem id="menu_daily_disbursement_sheets"
+              name="Daily Sheets"
+              parent="menu_daily_disbursement_root"
+              action="action_daily_disbursement"
+              sequence="20"/>
+
+    <menuitem id="menu_daily_disbursement_reporting"
+              name="Reporting"
+              parent="menu_daily_disbursement_root"
+              sequence="50"/>
+
+    <menuitem id="menu_daily_disbursement_line_analysis"
+              name="Line Analysis"
+              parent="menu_daily_disbursement_reporting"
+              action="action_daily_disbursement_line_analysis"
+              sequence="10"/>
+
+    <menuitem id="menu_daily_disbursement_config"
+              name="Configuration"
+              parent="menu_daily_disbursement_root"
+              sequence="90"
+              groups="group_daily_disbursement_manager"/>
+
+    <menuitem id="menu_daily_disbursement_tag"
+              name="Category Tags"
+              parent="menu_daily_disbursement_config"
+              action="action_daily_disbursement_tag"
+              sequence="10"/>
+</odoo>

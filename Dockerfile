@@ -129,27 +129,32 @@ RUN mkdir -p /tmp/addons/extra-addons /tmp/addons/oca-addons && \
     cp -r /tmp/odoomates/om_account_asset                   /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_account_bank_statement_import   /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_account_budget                  /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_account_cash_forecast           /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_account_check_printing          /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_account_daily_reports            /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_account_followup                /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_account_reconcile               /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_currency_rate_update            /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_currency_revaluation            /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_data_remove                     /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_fiscal_year                     /tmp/addons/extra-addons/ && \
-    cp -r /tmp/odoomates/om_hr_payroll                      /tmp/addons/extra-addons/ && \
-    cp -r /tmp/odoomates/om_hr_payroll_account              /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_recurring_payments              /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_spreadsheet_account             /tmp/addons/extra-addons/ && \
+    cp -r /tmp/odoomates/om_spreadsheet_account_asset       /tmp/addons/extra-addons/ && \
     cp -r /tmp/odoomates/om_spreadsheet_account_budget      /tmp/addons/extra-addons/ && \
-
+    cp -r /tmp/odoomates/om_spreadsheet_account_followup    /tmp/addons/extra-addons/ && \
     # ── OCA: MIS Builder ──
     cp -r /tmp/oca-mis-builder/mis_builder         /tmp/addons/oca-addons/ && \
-    cp -r /tmp/oca-mis-builder/mis_builder_budget  /tmp/addons/oca-addons/ 2>/dev/null || true && \
+    { cp -r /tmp/oca-mis-builder/mis_builder_budget  /tmp/addons/oca-addons/ 2>/dev/null || true; } && \
     # ── OCA: Report Engine ──
-    cp -r /tmp/oca-reporting-engine/report_xlsx    /tmp/addons/oca-addons/ 2>/dev/null || true && \
+    { cp -r /tmp/oca-reporting-engine/report_xlsx    /tmp/addons/oca-addons/ 2>/dev/null || true; } && \
     # ── OCA: Web ──
-    cp -r /tmp/oca-web/web_responsive              /tmp/addons/oca-addons/ 2>/dev/null || true && \
+    { cp -r /tmp/oca-web/web_responsive              /tmp/addons/oca-addons/ 2>/dev/null || true; } && \
     # ── OCA: Server Tools ──
-    cp -r /tmp/oca-server-tools/session_redis      /tmp/addons/oca-addons/ 2>/dev/null || true && \
-    cp -r /tmp/oca-server-tools/base_sparse_field  /tmp/addons/oca-addons/ 2>/dev/null || true && \
+    { cp -r /tmp/oca-server-tools/session_redis      /tmp/addons/oca-addons/ 2>/dev/null || true; } && \
+    { cp -r /tmp/oca-server-tools/base_sparse_field  /tmp/addons/oca-addons/ 2>/dev/null || true; } && \
     # ── OCA: Server UX ──
-    cp -r /tmp/oca-server-ux/base_technical_features /tmp/addons/oca-addons/ 2>/dev/null || true && \
+    { cp -r /tmp/oca-server-ux/base_technical_features /tmp/addons/oca-addons/ 2>/dev/null || true; } && \
     # ── Cleanup ──
     rm -rf /tmp/odoomates /tmp/oca-*
 

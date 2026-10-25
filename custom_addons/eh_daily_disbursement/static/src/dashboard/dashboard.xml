@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="eh_daily_disbursement.Dashboard">
+        <div class="o_action eh_dashboard_root o_eh_dd" t-ref="root">
+
+            <!-- Header + filters (one row, wraps on narrow screens) -->
+            <header class="o_eh_dd_header">
+                <div class="o_eh_dd_title">
+                    <h1>Daily Disbursement</h1>
+                    <span t-if="state.data" class="o_eh_dd_subtitle">
+                        <t t-esc="periodLabel"/>
+                        <span class="o_eh_dd_muted"> · compared with <t t-esc="previousLabel"/></span>
+                    </span>
+                </div>
+                <div class="o_eh_dd_filters">
+                    <div class="o_eh_dd_segmented" role="group" aria-label="Period">
+                        <t t-foreach="periods" t-as="period" t-key="period.key">
+                            <button type="button"
+                                    t-att-class="{'active': state.filters.period === period.key}"
+                                    t-att-aria-pressed="state.filters.period === period.key ? 'true' : 'false'"
+                                    t-on-click="() => this.setPeriod(period.key)"
+                                    t-esc="period.label"/>
+                        </t>
+                    </div>
+                    <div t-if="state.filters.period === 'custom'" class="o_eh_dd_range">
+                        <input type="date" aria-label="From" t-att-value="state.filters.dateFrom"
+                               t-on-change="(ev) => this.onDateChange('dateFrom', ev)"/>
+                        <span class="o_eh_dd_muted">–</span>
+                        <input type="date" aria-label="To" t-att-value="state.filters.dateTo"
+                               t-on-change="(ev) => this.onDateChange('dateTo', ev)"/>
+                    </div>
+                    <select t-if="state.data" class="o_eh_dd_select" aria-label="Category tag"
+                            t-on-change="onTagChange">
+                        <option value="" t-att-selected="!state.filters.tagId">All tags</option>
+                        <t t-foreach="state.data.tags" t-as="tag" t-key="tag.id">
+                            <option t-att-value="tag.id" t-att-selected="state.filters.tagId === tag.id"
+                                    t-esc="tag.name"/>
+                        </t>
+                    </select>
+                    <label class="o_eh_dd_switch">
+                        <input type="checkbox" t-att-checked="state.filters.includeDraft"
+                               t-on-change="onDraftToggle"/>
+                        <span>Include drafts</span>
+                    </label>
+                    <div t-if="state.data and !customIncomplete" class="o_eh_dd_export" role="group" aria-label="Export">
+                        <button type="button" title="Download the period summary as PDF" t-on-click="exportPdf">
+                            <i class="fa fa-file-pdf-o"/> PDF
+                        </button>
+                        <button type="button" title="Download every figure and line as Excel"
+                                t-att-disabled="state.exporting" t-on-click="exportXlsx">
+                            <i t-att-class="state.exporting ? 'fa fa-circle-o-notch fa-spin' : 'fa fa-file-excel-o'"/> Excel
+                        </button>
+                    </div>
+                    <i t-att-class="'fa fa-circle-o-notch fa-spin o_eh_dd_spinner' + (state.loading ? '' : ' invisible')"
+                       aria-hidden="true"/>
+                </div>
+            </header>
+
+            <div t-if="state.error" class="o_eh_dd_notice o_eh_dd_notice_error" role="alert">
+                <i class="fa fa-exclamation-triangle me-2"/><t t-esc="state.error"/>
+            </div>
+            <div t-elif="customIncomplete" class="o_eh_dd_notice">
+                <i class="fa fa-calendar me-2"/>Pick a start and an end date.
+            </div>
+
+            <t t-if="state.data">
+                <div t-att-class="'o_eh_dd_body' + (state.loading ? ' o_eh_dd_stale' : '')">
+
+                    <div t-if="state.data.converted" class="o_eh_dd_notice">
+                        <i class="fa fa-exchange me-2"/>
+                        Amounts from companies in other currencies are converted to
+                        <b t-esc="state.data.currency.symbol"/> at the rate of <t t-esc="date(state.data.period.date_to)"/>.
+                    </div>
+
+                    <!-- Needs action: whatever the period -->
+                    <div t-if="state.data.sheets.overdue_drafts or state.data.sheets.to_close" class="o_eh_dd_actions">
+                        <button t-if="state.data.sheets.overdue_drafts" type="button" class="o_eh_dd_action"
+                                t-on-click="() => this.openSheets('overdue')">
+                            <i class="fa fa-clock-o"/>
+                            <b t-esc="state.data.sheets.overdue_drafts"/> overdue draft sheet(s) to confirm
+                        </button>
+                        <button t-if="state.data.sheets.to_close" type="button" class="o_eh_dd_action"
+                                t-on-click="() => this.openSheets('to_close')">
+                            <i class="fa fa-lock"/>
+                            <b t-esc="state.data.sheets.to_close"/> confirmed sheet(s) waiting to be closed
+                        </button>
+                    </div>
+
+                    <!-- KPI cards -->
+                    <section class="o_eh_dd_kpis">
+                        <button type="button" class="o_eh_dd_kpi" t-on-click="() => this.openKpi('out')">
+                            <span class="o_eh_dd_kpi_label"><i class="o_eh_dd_swatch o_eh_dd_swatch_out"/>Disbursed</span>
+                            <span class="o_eh_dd_kpi_value" t-esc="money(state.data.kpi.disbursed_cost.value)"/>
+                            <span class="o_eh_dd_kpi_sub"><t t-esc="qty(state.data.kpi.disbursed_qty.value)"/> units</span>
+                            <t t-set="d" t-value="delta('disbursed_cost')"/>
+                            <span class="o_eh_dd_delta" t-att-title="previousTitle('disbursed_cost')">
+                                <i t-att-class="'fa ' + d.icon"/> <bdi t-if="d.pct" dir="ltr" t-esc="d.pct"/> <t t-esc="d.text"/>
+                            </span>
+                        </button>
+                        <button type="button" class="o_eh_dd_kpi" t-on-click="() => this.openKpi('return')">
+                            <span class="o_eh_dd_kpi_label"><i class="o_eh_dd_swatch o_eh_dd_swatch_return"/>Returned</span>
+                            <span class="o_eh_dd_kpi_value" t-esc="money(state.data.kpi.returned_cost.value)"/>
+                            <span class="o_eh_dd_kpi_sub"><t t-esc="qty(state.data.kpi.returned_qty.value)"/> units</span>
+                            <t t-set="d" t-value="delta('returned_cost')"/>
+                            <span class="o_eh_dd_delta" t-att-title="previousTitle('returned_cost')">
+                                <i t-att-class="'fa ' + d.icon"/> <bdi t-if="d.pct" dir="ltr" t-esc="d.pct"/> <t t-esc="d.text"/>
+                            </span>
+                        </button>
+                        <button type="button" class="o_eh_dd_kpi o_eh_dd_kpi_net" t-on-click="() => this.openKpi('net')">
+                            <span class="o_eh_dd_kpi_label">Net cost</span>
+                            <span class="o_eh_dd_kpi_value" t-esc="money(state.data.kpi.net_cost.value)"/>
+                            <span class="o_eh_dd_kpi_sub"><t t-esc="qty(state.data.kpi.net_qty.value)"/> net units</span>
+                            <t t-set="d" t-value="delta('net_cost')"/>
+                            <span class="o_eh_dd_delta" t-att-title="previousTitle('net_cost')">
+                                <i t-att-class="'fa ' + d.icon"/> <bdi t-if="d.pct" dir="ltr" t-esc="d.pct"/> <t t-esc="d.text"/>
+                            </span>
+                        </button>
+                        <div class="o_eh_dd_kpi o_eh_dd_kpi_static">
+                            <span class="o_eh_dd_kpi_label">Activity</span>
+                            <span class="o_eh_dd_kpi_value"><t t-esc="state.data.kpi.sheet_count.value"/> <small>sheets</small></span>
+                            <span class="o_eh_dd_kpi_sub"><t t-esc="state.data.kpi.product_count.value"/> different products</span>
+                            <span class="o_eh_dd_delta o_eh_dd_states">
+                                <bdi t-foreach="stateCounts" t-as="item" t-key="item.key">
+                                    <b t-esc="item.count"/> <t t-esc="item.label"/>
+                                </bdi>
+                            </span>
+                        </div>
+                    </section>
+
+                    <!-- Empty period -->
+                    <section t-if="isEmpty" class="o_eh_dd_card o_eh_dd_empty">
+                        <i class="fa fa-inbox fa-2x"/>
+                        <h3>No disbursements in this period</h3>
+                        <p class="o_eh_dd_muted">Pick another period, include drafts, or record today's sheet.</p>
+                    </section>
+
+                    <t t-else="">
+                        <!-- Charts -->
+                        <section t-att-class="'o_eh_dd_grid' + (showTrend ? ' o_eh_dd_grid_2_1' : '')">
+                            <div t-if="showTrend" class="o_eh_dd_card">
+                                <h2>Cost over time</h2>
+                                <div class="o_eh_dd_chart">
+                                    <canvas t-ref="trendChart" role="img"
+                                            aria-label="Disbursed and returned cost over time"/>
+                                </div>
+                            </div>
+                            <div class="o_eh_dd_card">
+                                <h2>Top products by disbursed cost</h2>
+                                <div class="o_eh_dd_chart"
+                                     t-att-style="'height: ' + Math.max(200, 44 + state.data.top_products.length * 34) + 'px'">
+                                    <canvas t-ref="productsChart" role="img"
+                                            aria-label="Top products by disbursed and returned cost"/>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Product tables -->
+                        <section class="o_eh_dd_grid o_eh_dd_grid_1_1">
+                            <t t-foreach="tableSpecs" t-as="spec" t-key="spec.key">
+                                <t t-set="table" t-value="state.data.tables[spec.key]"/>
+                                <div class="o_eh_dd_card">
+                                    <h2><i t-att-class="'o_eh_dd_swatch o_eh_dd_swatch_' + spec.moveType"/><t t-esc="spec.title"/></h2>
+                                    <div class="o_eh_dd_table_wrap">
+                                        <table class="o_eh_dd_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th class="o_eh_dd_num">Qty</th>
+                                                    <th class="o_eh_dd_num">Avg cost</th>
+                                                    <th class="o_eh_dd_num">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr t-foreach="table.rows" t-as="row" t-key="row.product_id"
+                                                    t-on-click="() => this.openProduct(row)">
+                                                    <td t-esc="row.name"/>
+                                                    <td class="o_eh_dd_num"><t t-esc="qty(row.qty)"/> <small t-esc="row.uom"/></td>
+                                                    <td class="o_eh_dd_num" t-esc="money(row.avg_cost)"/>
+                                                    <td class="o_eh_dd_num" t-esc="money(row.subtotal)"/>
+                                                </tr>
+                                                <tr t-if="!table.rows.length" class="o_eh_dd_table_empty">
+                                                    <td colspan="4">Nothing in this period.</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="3">Total</td>
+                                                    <td class="o_eh_dd_num"
+                                                        t-esc="money(state.data.kpi[spec.totalKey].value)"/>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <p t-if="table.truncated" class="o_eh_dd_muted o_eh_dd_note">
+                                        Showing the first 500 products. Open the line analysis for the full list.
+                                    </p>
+                                </div>
+                            </t>
+                        </section>
+
+                        <div class="o_eh_dd_net_banner">
+                            <span>Net cost for the period = disbursed − returned =</span>
+                            <b t-esc="money(state.data.kpi.net_cost.value)"/>
+                        </div>
+
+                        <!-- Tags + recent activity -->
+                        <section class="o_eh_dd_grid o_eh_dd_grid_1_1">
+                            <div class="o_eh_dd_card">
+                                <h2>By category tag</h2>
+                                <ul class="o_eh_dd_tags">
+                                    <li t-foreach="state.data.by_tag" t-as="row" t-key="row.tag_id or 0"
+                                        t-on-click="() => row.tag_id and this.openTag(row)"
+                                        t-att-class="row.tag_id ? 'o_eh_dd_clickable' : ''">
+                                        <span class="o_eh_dd_tag_name">
+                                            <i t-att-class="'o_eh_dd_tag_dot o_tag_color_' + row.color"/>
+                                            <t t-esc="row.name"/>
+                                        </span>
+                                        <span class="o_eh_dd_meter" aria-hidden="true">
+                                            <span t-att-style="'width: ' + tagShare(row) + '%'"/>
+                                        </span>
+                                        <span class="o_eh_dd_num" t-esc="money(row.net_cost)"
+                                              t-att-title="tagTitle(row)"/>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="o_eh_dd_card">
+                                <h2>Recently entered</h2>
+                                <ul class="o_eh_dd_recent">
+                                    <li t-foreach="state.data.recent" t-as="line" t-key="line.id"
+                                        t-on-click="() => this.openSheet(line.sheet_id)">
+                                        <span class="o_eh_dd_muted o_eh_dd_recent_date" t-esc="date(line.date, 'dd LLL')"/>
+                                        <span class="o_eh_dd_recent_product">
+                                            <t t-esc="line.product"/>
+                                            <small class="o_eh_dd_muted" t-esc="line.sheet"/>
+                                        </span>
+                                        <span t-att-class="'o_eh_dd_num o_eh_dd_qty_' + line.move_type">
+                                            <t t-esc="line.move_type === 'out' ? '+' : '−'"/><t t-esc="qty(line.qty)"/>
+                                            <small t-esc="line.uom"/>
+                                        </span>
+                                        <span class="o_eh_dd_num" t-esc="money(line.subtotal)"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </t>
+                </div>
+            </t>
+            <div t-elif="state.loading" class="o_eh_dd_loading">
+                <i class="fa fa-circle-o-notch fa-spin fa-2x"/>
+            </div>
+        </div>
+    </t>
+
+</templates>

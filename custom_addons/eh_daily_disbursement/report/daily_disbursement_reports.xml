@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--
+        Two suite-styled PDFs (eh_account_base.eh_report_styles):
+
+        * Daily sheet: one page per sheet, from the Print menu of the sheet
+          form / list. Totals, both line tables, approval stamps and two
+          signature lines for the paper trail.
+        * Period summary: printed from the dashboard with its filters; same
+          figures as the screen (see report_period_summary.py).
+    -->
+
+    <record id="action_report_daily_disbursement_sheet" model="ir.actions.report">
+        <field name="name">Daily Disbursement Sheet</field>
+        <field name="model">eh.daily.disbursement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">eh_daily_disbursement.report_daily_disbursement_sheet</field>
+        <field name="report_file">eh_daily_disbursement.report_daily_disbursement_sheet</field>
+        <field name="print_report_name">'Daily Disbursement - %s' % (object.name or '').replace('/', '-')</field>
+        <field name="binding_model_id" ref="model_eh_daily_disbursement"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="eh_account_base.paperformat_eh_portrait"/>
+    </record>
+
+    <record id="action_report_daily_disbursement_summary" model="ir.actions.report">
+        <field name="name">Disbursement Summary</field>
+        <field name="model">eh.daily.disbursement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">eh_daily_disbursement.report_period_summary</field>
+        <field name="report_file">eh_daily_disbursement.report_period_summary</field>
+        <field name="paperformat_id" ref="eh_account_base.paperformat_eh_portrait"/>
+    </record>
+
+    <template id="report_daily_disbursement_styles">
+        <style type="text/css">
+            .eh_dd_boxes { width: 100%; border-collapse: separate; border-spacing: 6pt 0; margin: 0 -6pt 12pt; }
+            .eh_dd_boxes td { width: 33%; vertical-align: top; }
+            .eh_dd_num { text-align: right; white-space: nowrap; }
+            /* Beat .eh_pdf_table thead th { text-align: left } so headers sit over their numbers. */
+            .eh_pdf_table thead th.eh_dd_num { text-align: right; }
+            .eh_dd_section { margin-top: 14pt; }
+            .eh_dd_muted { color: #6c757d; }
+            .eh_dd_table_total td { font-weight: 700; border-top: 1pt solid #1a2332; }
+            .eh_dd_bar { height: 6pt; background: #2a78d6; }
+            .eh_dd_bar_return { height: 6pt; background: #eb6834; }
+        </style>
+    </template>
+
+    <template id="report_daily_disbursement_lines">
+        <!-- lines, title, total_label -->
+        <div class="eh_dd_section">
+            <div class="eh_pdf_subtitle" t-out="title"/>
+            <table class="eh_pdf_table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="eh_dd_num">Quantity</th>
+                        <th class="eh_dd_num">Unit cost</th>
+                        <th class="eh_dd_num">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="lines" t-as="line">
+                        <td>
+                            <span t-field="line.product_id"/>
+                            <div t-if="line.note" class="eh_dd_muted" t-out="line.note"/>
+                        </td>
+                        <td class="eh_dd_num"><span t-field="line.qty"/> <span t-field="line.uom_id"/></td>
+                        <td class="eh_dd_num"><span t-field="line.unit_cost"
+                                t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/></td>
+                        <td class="eh_dd_num"><span t-field="line.subtotal"/></td>
+                    </tr>
+                    <tr t-if="not lines">
+                        <td colspan="4" class="eh_dd_muted">Nothing recorded.</td>
+                    </tr>
+                    <tr class="eh_dd_table_total">
+                        <td colspan="3" t-out="total_label"/>
+                        <td class="eh_dd_num" t-out="total"
+                            t-options="{'widget': 'monetary', 'display_currency': currency}"/>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="report_daily_disbursement_sheet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t t-call="eh_account_base.eh_report_styles"/>
+                    <t t-call="eh_daily_disbursement.report_daily_disbursement_styles"/>
+                    <div class="page eh_pdf_page">
+                        <h1 class="eh_pdf_title">Daily Disbursement Sheet</h1>
+                        <div class="eh_pdf_meta">
+                            <span><strong>Reference:</strong> <t t-out="o.name"/></span>
+                            <span><strong>Date:</strong> <t t-out="o.date" t-options="{'widget': 'date'}"/></span>
+                            <span t-if="o.tag_id"><strong>Category:</strong> <t t-out="o.tag_id.name"/></span>
+                            <span><strong>Status:</strong> <t t-out="dict(o._fields['state']._description_selection(o.env))[o.state]"/></span>
+                            <span t-if="o.responsible_id"><strong>Responsible:</strong> <t t-out="o.responsible_id.name"/></span>
+                        </div>
+
+                        <table class="eh_dd_boxes">
+                            <tr>
+                                <td><div class="eh_pdf_summary_box">
+                                    <div class="label">Disbursed</div>
+                                    <div class="value"><span t-field="o.disbursed_cost"/></div>
+                                    <div class="eh_dd_muted"><span t-field="o.disbursed_qty"/> units</div>
+                                </div></td>
+                                <td><div class="eh_pdf_summary_box">
+                                    <div class="label">Returned</div>
+                                    <div class="value"><span t-field="o.returned_cost"/></div>
+                                    <div class="eh_dd_muted"><span t-field="o.returned_qty"/> units</div>
+                                </div></td>
+                                <td><div class="eh_pdf_summary_box">
+                                    <div class="label">Net cost</div>
+                                    <div class="value"><span t-field="o.net_cost"/></div>
+                                    <div class="eh_dd_muted"><span t-field="o.net_qty"/> net units</div>
+                                </div></td>
+                            </tr>
+                        </table>
+
+                        <t t-call="eh_daily_disbursement.report_daily_disbursement_lines">
+                            <t t-set="title">Disbursed</t>
+                            <t t-set="lines" t-value="o.disbursement_line_ids"/>
+                            <t t-set="total" t-value="o.disbursed_cost"/>
+                            <t t-set="total_label">Total disbursed</t>
+                            <t t-set="currency" t-value="o.currency_id"/>
+                        </t>
+                        <t t-call="eh_daily_disbursement.report_daily_disbursement_lines">
+                            <t t-set="title">Returned</t>
+                            <t t-set="lines" t-value="o.return_line_ids"/>
+                            <t t-set="total" t-value="o.returned_cost"/>
+                            <t t-set="total_label">Total returned</t>
+                            <t t-set="currency" t-value="o.currency_id"/>
+                        </t>
+
+                        <div t-if="o.notes and o.notes != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'" class="eh_dd_section">
+                            <div class="eh_pdf_subtitle">Notes</div>
+                            <div t-field="o.notes"/>
+                        </div>
+
+                        <div class="eh_pdf_signature_block">
+                            <div t-if="o.confirmed_by_id">
+                                Confirmed by <strong t-out="o.confirmed_by_id.name"/>
+                                on <t t-out="o.confirmed_date" t-options="{'widget': 'datetime'}"/>
+                            </div>
+                            <div t-if="o.closed_by_id">
+                                Closed by <strong t-out="o.closed_by_id.name"/>
+                                on <t t-out="o.closed_date" t-options="{'widget': 'datetime'}"/>
+                            </div>
+                            <table style="width: 100%; margin-top: 10pt;">
+                                <tr>
+                                    <td style="width: 50%;"><div class="eh_pdf_signature_line" style="width: 85%;">Prepared by</div></td>
+                                    <td style="width: 50%;"><div class="eh_pdf_signature_line" style="width: 85%;">Approved by</div></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <t t-call="eh_account_base.eh_report_footer"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_period_summary_box">
+        <!-- label (text), item (kpi entry), money (monetary options) -->
+        <div class="eh_pdf_summary_box">
+            <div class="label" t-out="label"/>
+            <div class="value" t-out="item['value']" t-options="money"/>
+            <div class="eh_dd_muted">
+                Previous: <t t-out="item['previous']" t-options="money"/>
+                <t t-if="item['delta_pct'] is not None">(<t t-out="('+' if item['delta_pct'] &gt; 0 else '') + str(item['delta_pct'])"/>%)</t>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_period_summary">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-call="eh_account_base.eh_report_styles"/>
+                <t t-call="eh_daily_disbursement.report_daily_disbursement_styles"/>
+                <t t-set="kpi" t-value="data['kpi']"/>
+                <t t-set="money" t-value="{'widget': 'monetary', 'display_currency': currency}"/>
+                <div class="page eh_pdf_page">
+                    <h1 class="eh_pdf_title">Disbursement Summary</h1>
+                    <div class="eh_pdf_meta">
+                        <span><strong>Period:</strong>
+                            <t t-out="to_date(data['period']['date_from'])" t-options="{'widget': 'date'}"/> –
+                            <t t-out="to_date(data['period']['date_to'])" t-options="{'widget': 'date'}"/></span>
+                        <span><strong>Compared with:</strong>
+                            <t t-out="to_date(data['period']['prev_from'])" t-options="{'widget': 'date'}"/> –
+                            <t t-out="to_date(data['period']['prev_to'])" t-options="{'widget': 'date'}"/></span>
+                        <span><strong>Category:</strong> <t t-if="tag" t-out="tag.name"/><t t-else="">All tags</t></span>
+                        <span><strong>Drafts:</strong> <t t-if="include_draft">Included</t><t t-else="">Excluded</t></span>
+                    </div>
+                    <p t-if="data['converted']" class="eh_dd_muted">
+                        Amounts from companies in other currencies are converted to <t t-out="currency.name"/>
+                        at the rate of the period end.
+                    </p>
+
+                    <table class="eh_dd_boxes">
+                        <tr>
+                            <td><t t-call="eh_daily_disbursement.report_period_summary_box">
+                                <t t-set="label">Disbursed</t><t t-set="item" t-value="kpi['disbursed_cost']"/>
+                            </t></td>
+                            <td><t t-call="eh_daily_disbursement.report_period_summary_box">
+                                <t t-set="label">Returned</t><t t-set="item" t-value="kpi['returned_cost']"/>
+                            </t></td>
+                            <td><t t-call="eh_daily_disbursement.report_period_summary_box">
+                                <t t-set="label">Net cost</t><t t-set="item" t-value="kpi['net_cost']"/>
+                            </t></td>
+                        </tr>
+                    </table>
+                    <p class="eh_dd_muted">
+                        <t t-out="kpi['sheet_count']['value']"/> sheets ·
+                        <t t-out="kpi['product_count']['value']"/> products ·
+                        <t t-out="data['sheets']['by_state']['draft']"/> draft,
+                        <t t-out="data['sheets']['by_state']['confirmed']"/> confirmed,
+                        <t t-out="data['sheets']['by_state']['closed']"/> closed
+                    </p>
+
+                    <div class="eh_dd_section" t-if="data['by_tag']">
+                        <div class="eh_pdf_subtitle">By category tag</div>
+                        <table class="eh_pdf_table">
+                            <thead><tr><th>Tag</th><th class="eh_dd_num">Disbursed</th>
+                                <th class="eh_dd_num">Returned</th><th class="eh_dd_num">Net</th></tr></thead>
+                            <tbody>
+                                <tr t-foreach="data['by_tag']" t-as="row">
+                                    <td t-out="row['name']"/>
+                                    <td class="eh_dd_num" t-out="row['disbursed_cost']" t-options="money"/>
+                                    <td class="eh_dd_num" t-out="row['returned_cost']" t-options="money"/>
+                                    <td class="eh_dd_num" t-out="row['net_cost']" t-options="money"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="eh_dd_section">
+                        <div class="eh_pdf_subtitle">
+                            <t t-if="data['trend']['granularity'] == 'day'">By day</t>
+                            <t t-else="">By month</t>
+                        </div>
+                        <t t-set="peak" t-value="max([p['disbursed'] for p in data['trend']['points']] + [1])"/>
+                        <table class="eh_pdf_table">
+                            <thead><tr><th>Date</th><th class="eh_dd_num">Disbursed</th>
+                                <th class="eh_dd_num">Returned</th><th class="eh_dd_num">Net</th><th style="width: 22%;"/></tr></thead>
+                            <tbody>
+                                <tr t-foreach="data['trend']['points']" t-as="point">
+                                    <td t-out="to_date(point['date'])" t-options="{'widget': 'date'}"/>
+                                    <td class="eh_dd_num" t-out="point['disbursed']" t-options="money"/>
+                                    <td class="eh_dd_num" t-out="point['returned']" t-options="money"/>
+                                    <td class="eh_dd_num" t-out="point['net']" t-options="money"/>
+                                    <td>
+                                        <div class="eh_dd_bar" t-attf-style="width: #{int(point['disbursed'] / peak * 100)}%;"/>
+                                        <div class="eh_dd_bar_return" t-attf-style="width: #{int(point['returned'] / peak * 100)}%; margin-top: 1pt;"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <t t-foreach="['disbursed', 'returned']" t-as="kind">
+                        <t t-set="table" t-value="data['tables'][kind]"/>
+                        <div class="eh_dd_section" t-if="table['rows']">
+                            <div class="eh_pdf_subtitle">
+                                <t t-if="kind == 'disbursed'">Disbursed products</t>
+                                <t t-else="">Returned products</t>
+                            </div>
+                            <table class="eh_pdf_table">
+                                <thead><tr><th>Product</th><th class="eh_dd_num">Quantity</th>
+                                    <th class="eh_dd_num">Avg cost</th><th class="eh_dd_num">Total</th></tr></thead>
+                                <tbody>
+                                    <tr t-foreach="table['rows']" t-as="row">
+                                        <td t-out="row['name']"/>
+                                        <td class="eh_dd_num"><t t-out="row['qty']" t-options="{'widget': 'float', 'precision': 2}"/> <t t-out="row['uom']"/></td>
+                                        <td class="eh_dd_num" t-out="row['avg_cost']" t-options="money"/>
+                                        <td class="eh_dd_num" t-out="row['subtotal']" t-options="money"/>
+                                    </tr>
+                                    <tr class="eh_dd_table_total">
+                                        <td colspan="3">Total</td>
+                                        <td class="eh_dd_num" t-out="kpi[kind + '_cost']['value']" t-options="money"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p t-if="table['truncated']" class="eh_dd_muted">Only the first 500 products are listed; the XLSX export has all of them.</p>
+                        </div>
+                    </t>
+                    <t t-call="eh_account_base.eh_report_footer"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

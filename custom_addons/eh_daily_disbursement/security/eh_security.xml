@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="module_category_daily_disbursement" model="ir.module.category">
+            <field name="name">Daily Disbursement</field>
+            <field name="sequence">40</field>
+        </record>
+
+        <!--
+            Own User / Manager pair rather than the EH accounting groups:
+            the people who record disbursements are often not accountants.
+            EH Accounting Managers get Disbursement Manager implicitly, and
+            the EH Auditor gets read-only rows in ir.model.access.csv.
+        -->
+        <record id="group_daily_disbursement_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_daily_disbursement"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">Records daily sheets and their lines.</field>
+        </record>
+
+        <record id="group_daily_disbursement_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_daily_disbursement"/>
+            <field name="implied_ids" eval="[(4, ref('group_daily_disbursement_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="comment">Closes and reopens sheets and manages category tags.</field>
+        </record>
+
+        <record id="eh_account_base.group_eh_manager" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_daily_disbursement_manager'))]"/>
+        </record>
+
+        <!-- Multi-company isolation -->
+        <record id="rule_daily_disbursement_company" model="ir.rule">
+            <field name="name">Daily Disbursement: company isolation</field>
+            <field name="model_id" ref="model_eh_daily_disbursement"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="rule_daily_disbursement_line_company" model="ir.rule">
+            <field name="name">Daily Disbursement Line: company isolation</field>
+            <field name="model_id" ref="model_eh_daily_disbursement_line"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="rule_daily_disbursement_tag_company" model="ir.rule">
+            <field name="name">Daily Disbursement Tag: company isolation</field>
+            <field name="model_id" ref="model_eh_daily_disbursement_tag"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+    </data>
+</odoo>

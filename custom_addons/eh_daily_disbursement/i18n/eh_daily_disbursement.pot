@@ -1,0 +1,2093 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eh_daily_disbursement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20260908\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 14:49+0000\n"
+"PO-Revision-Date: 2026-10-25 14:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "%(count)s lines imported from %(file)s."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "%(key)r matches several products by %(field)s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement_line.py:0
+#, python-format
+msgid "%(product)s (%(categ)s) is outside the categories of tag %(tag)s."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "%(product)s is outside the categories of tag %(tag)s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement_line.py:0
+#, python-format
+msgid ""
+"%(product)s: quantity must be greater than zero. Record a return as a Return"
+" line, not a negative quantity."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement_line.py:0
+#, python-format
+msgid "%(product)s: unit cost cannot be negative."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid ""
+"%(sheet)s already covers %(date)s for %(tag)s. Add the lines there, or "
+"cancel it first."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid ""
+"%(sheet)s already has lines. Copying the previous sheet only fills an empty "
+"sheet."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid ""
+"%(sheets)s has no lines. Add what was disbursed or returned before "
+"confirming."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.report,print_report_name:eh_daily_disbursement.action_report_daily_disbursement_sheet
+msgid "'Daily Disbursement - %s' % (object.name or '').replace('/', '-')"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "... and %s more."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "<b>note</b>: optional"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid ""
+"<b>product</b>: internal reference, barcode or exact product name (required)"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "<b>qty</b>: quantity greater than zero (required)"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "<b>type</b>: <code>out</code> or <code>return</code> (empty means out)"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "<b>unit_cost</b>: leave empty to use today's product cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "<i class=\"fa fa-download\"/> Download template"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "<strong>Category:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "<strong>Compared with:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "<strong>Date:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "<strong>Drafts:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "<strong>Period:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "<strong>Reference:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "<strong>Responsible:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "<strong>Status:</strong>"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "A custom period needs both a start and an end date."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.constraint,message:eh_daily_disbursement.constraint_eh_daily_disbursement_unique_day
+msgid "A sheet already covers this day and tag in this company."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.constraint,message:eh_daily_disbursement.constraint_eh_daily_disbursement_tag_unique_code
+msgid "A tag code must be unique per company."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__active
+msgid "Active"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Activity"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "All Lines"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_form
+msgid "All product categories"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "All tags"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__allowed_categ_ids
+msgid "Allowed Categ"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_form
+msgid "Allowed Products"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "Amounts from companies in other currencies are converted to"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid ""
+"Amounts from other company currencies are converted at the period-end rate."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Anything worth knowing about this day..."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Approval"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "Approved by"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_form
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_search
+msgid "Archived"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "Avg cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "By Day"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "By Tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "By category tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "By day"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "By month"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "Cancel"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid ""
+"Cancel this confirmed sheet? Its lines stay on record but no longer count."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Cancel this sheet? Its lines stay on record but no longer count."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields.selection,name:eh_daily_disbursement.selection__eh_daily_disbursement__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "Cannot %(action)s %(sheets)s in its current status."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__allowed_categ_ids
+msgid "Categories lines may pick products from (tag restriction)."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__tag_id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__tag_id
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_form
+msgid "Category Tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.act_window,name:eh_daily_disbursement.action_daily_disbursement_tag
+#: model:ir.ui.menu,name:eh_daily_disbursement.menu_daily_disbursement_tag
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_tree
+msgid "Category Tags"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Category tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Change"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Choose a period of at most three years."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Close Day"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields.selection,name:eh_daily_disbursement.selection__eh_daily_disbursement__state__closed
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "Closed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__closed_by_id
+msgid "Closed By"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__closed_date
+msgid "Closed On"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "Closed by"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:res.groups,comment:eh_daily_disbursement.group_daily_disbursement_manager
+msgid "Closes and reopens sheets and manages category tags."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__code
+msgid "Code"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__color
+msgid "Color"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement_tag__color
+msgid "Colour used for this tag in lists and dashboard charts."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__company_id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__company_id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__company_id
+#, python-format
+msgid "Company"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Compared with"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.ui.menu,name:eh_daily_disbursement.menu_daily_disbursement_config
+msgid "Configuration"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Confirm"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:mail.activity.type,name:eh_daily_disbursement.mail_activity_confirm_sheet
+msgid "Confirm Daily Sheet"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "Confirm the %(date)s sheet"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields.selection,name:eh_daily_disbursement.selection__eh_daily_disbursement__state__confirmed
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "Confirmed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__confirmed_by_id
+msgid "Confirmed By"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__confirmed_date
+msgid "Confirmed On"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "Confirmed by"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+msgid "Confirmed or Closed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Copy Previous Sheet"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Cost over time"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "Could not read the .xlsx file."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "Could not read the CSV file. Save it as UTF-8."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.actions.act_window,help:eh_daily_disbursement.action_daily_disbursement_tag
+msgid "Create a category tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.actions.act_window,help:eh_daily_disbursement.action_daily_disbursement
+msgid "Create today's disbursement sheet"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__create_uid
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__create_uid
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__create_uid
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__create_date
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__create_date
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__create_date
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__currency_id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__currency_id
+#, python-format
+msgid "Currency"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Custom"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model:ir.model,name:eh_daily_disbursement.model_eh_daily_disbursement
+#: model:ir.module.category,name:eh_daily_disbursement.module_category_daily_disbursement
+#: model:ir.ui.menu,name:eh_daily_disbursement.menu_daily_disbursement_root
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#, python-format
+msgid "Daily Disbursement"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model,name:eh_daily_disbursement.model_eh_daily_disbursement_dashboard
+msgid "Daily Disbursement Dashboard"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model,name:eh_daily_disbursement.model_eh_daily_disbursement_line
+msgid "Daily Disbursement Line"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model,name:eh_daily_disbursement.model_report_eh_daily_disbursement_report_period_summary
+msgid "Daily Disbursement Period Summary"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.report,name:eh_daily_disbursement.action_report_daily_disbursement_sheet
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "Daily Disbursement Sheet"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model,name:eh_daily_disbursement.model_eh_daily_disbursement_tag
+msgid "Daily Disbursement Tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.server,name:eh_daily_disbursement.ir_cron_remind_overdue_drafts_ir_actions_server
+msgid "Daily Disbursement: remind overdue draft sheets"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tree
+msgid "Daily Disbursements"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.act_window,name:eh_daily_disbursement.action_daily_disbursement
+#: model:ir.ui.menu,name:eh_daily_disbursement.menu_daily_disbursement_sheets
+msgid "Daily Sheets"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.client,name:eh_daily_disbursement.action_daily_disbursement_dashboard
+#: model:ir.ui.menu,name:eh_daily_disbursement.menu_daily_disbursement_dashboard
+msgid "Dashboard"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__date
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__date
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+#, python-format
+msgid "Date"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "Day"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement_line__uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#, python-format
+msgid "Disbursed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Disbursed %(disbursed)s · Returned %(returned)s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__disbursed_cost
+msgid "Disbursed Cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__disbursement_line_ids
+#, python-format
+msgid "Disbursed Lines"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__disbursed_qty
+msgid "Disbursed Qty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Disbursed and returned cost over time"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Disbursed cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "Disbursed products"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Disbursed qty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Disbursed quantity"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields.selection,name:eh_daily_disbursement.selection__eh_daily_disbursement_line__move_type__out
+msgid "Disbursement"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_graph
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_pivot
+msgid "Disbursement Analysis"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_analysis_tree
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#, python-format
+msgid "Disbursement Lines"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model:ir.actions.report,name:eh_daily_disbursement.action_report_daily_disbursement_summary
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "Disbursement Summary"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__display_name
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__display_name
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__display_name
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Download every figure and line as Excel"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Download the period summary as PDF"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields.selection,name:eh_daily_disbursement.selection__eh_daily_disbursement__state__draft
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "Draft"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Drafts included"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Excel"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "Excluded"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Export"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__file
+msgid "File"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__filename
+msgid "Filename"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "From"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "Group By"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__id
+msgid "ID"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__message_has_error
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "Import"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model,name:eh_daily_disbursement.model_eh_daily_disbursement_import
+msgid "Import Daily Disbursement Lines"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.act_window,name:eh_daily_disbursement.action_daily_disbursement_import
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "Import Lines"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Include drafts"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "Included"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Last 30 Days"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__write_uid
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__write_uid
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__write_uid
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__write_date
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__write_date
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__write_date
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement_tag__company_id
+msgid "Leave empty to share the tag across all companies."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.actions.act_window,name:eh_daily_disbursement.action_daily_disbursement_line_analysis
+#: model:ir.ui.menu,name:eh_daily_disbursement.menu_daily_disbursement_line_analysis
+msgid "Line Analysis"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__line_count
+msgid "Line Count"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__line_ids
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#, python-format
+msgid "Lines"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "Lines copied from %(sheet)s."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "Lines of %s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:res.groups,name:eh_daily_disbursement.group_daily_disbursement_manager
+msgid "Manager"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Metric"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "Month"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "My Sheets"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__name
+msgid "Name"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_analysis_tree
+#, python-format
+msgid "Net"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__net_cost
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tree
+msgid "Net Cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__net_qty
+msgid "Net Qty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Net amount"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "Net cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Net cost for the period = disbursed − returned ="
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Net quantity"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Net: %s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "No"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "No change"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.actions.act_window,help:eh_daily_disbursement.action_daily_disbursement_line_analysis
+msgid "No disbursement lines for this period"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "No disbursements in this period"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "No earlier sheet with lines exists for %(tag)s in %(company)s."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "No tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+msgid "Not Cancelled"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__note
+#, python-format
+msgid "Note"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__notes
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Notes"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Nothing in the previous period"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Nothing in this period."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid "Nothing is imported unless every row is valid."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_lines
+msgid "Nothing recorded."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid ""
+"Nothing was imported. Fix these rows and try again:\n"
+"%s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "Old .xls files are not supported. Save the file as .xlsx or .csv."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid ""
+"Only draft sheets can be deleted. Cancel the sheet instead so its history is"
+" kept."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid ""
+"Only draft sheets can change their date, tag, company or lines (%(fields)s)."
+" Reset the sheet to draft first."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid ""
+"Only the first 500 products are listed; the XLSX export has all of them."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Overdue Draft Sheets"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "PDF"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Period"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Pick a start and an end date."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Pick another period, include drafts, or record today's sheet."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "Prepared by"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Previous period"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Previous period: %s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary_box
+msgid "Previous:"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__product_id
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_lines
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+#, python-format
+msgid "Product"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__product_categ_ids
+msgid "Product Categories"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__product_categ_id
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+msgid "Product Category"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Products"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Qty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__qty
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_lines
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "Quantity"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "Reading .xlsx needs the openpyxl library; import a .csv instead."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Recently entered"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.actions.act_window,help:eh_daily_disbursement.action_daily_disbursement
+msgid ""
+"Record the products handed out and brought back each day;\n"
+"                the sheet totals the net cost for you."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:res.groups,comment:eh_daily_disbursement.group_daily_disbursement_user
+msgid "Records daily sheets and their lines."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__name
+msgid "Reference"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.ui.menu,name:eh_daily_disbursement.menu_daily_disbursement_reporting
+msgid "Reporting"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__responsible_id
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+msgid "Responsible"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields.selection,name:eh_daily_disbursement.selection__eh_daily_disbursement_line__move_type__return
+msgid "Return"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#, python-format
+msgid "Returned"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__returned_cost
+msgid "Returned Cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__return_line_ids
+#, python-format
+msgid "Returned Lines"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__returned_qty
+msgid "Returned Qty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Returned cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "Returned products"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Returned qty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Returned quantity"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "Row %(row)s: %(problems)s"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__sequence
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_tag__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_import__sheet_id
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__sheet_id
+#, python-format
+msgid "Sheet"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Sheets"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Sheets to Close"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement_tag__code
+msgid "Short technical identifier, unique per company."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid ""
+"Showing the first 500 products. Open the line analysis for the full list."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__signed_qty
+msgid "Signed Qty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__signed_subtotal
+msgid "Signed Subtotal"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__state
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__state
+msgid "State"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+#, python-format
+msgid "Status"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__subtotal
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_lines
+#, python-format
+msgid "Subtotal"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#, python-format
+msgid "Summary"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "Tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement_tag.py:0
+#, python-format
+msgid "Tag code %(code)s is already used by a shared tag."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement_tag.py:0
+#, python-format
+msgid "Tag code %(code)s is already used in %(company)s."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.actions.act_window,help:eh_daily_disbursement.action_daily_disbursement_tag
+msgid ""
+"Tags group daily sheets (e.g. Perfumes, Nail Polish) and can\n"
+"                restrict which product categories a sheet accepts."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "The dashboard could not be loaded."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "The file has no data rows."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "The file is empty."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid ""
+"The header row must contain the columns: %(cols)s. Download the template to "
+"see the expected layout."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid ""
+"The lines of %(sheets)s are locked because the sheet is no longer draft. "
+"Reset it to draft to change them."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "The period starts after it ends."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "This Month"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "This Week"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "To"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+#, python-format
+msgid "Today"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Top products by disbursed and returned cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Top products by disbursed cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_analysis_tree
+#, python-format
+msgid "Total"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tree
+msgid "Total Disbursed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_form
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tree
+msgid "Total Returned"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "Total disbursed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "Total returned"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__move_type
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_line_search
+#, python-format
+msgid "Type"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Unit"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__unit_cost
+msgid "Unit Cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_lines
+#, python-format
+msgid "Unit cost"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement_line__uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Unknown dashboard period %r."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_import_form
+msgid ""
+"Upload a <b>.csv</b> or <b>.xlsx</b> file whose first row holds these column"
+" headers:"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:res.groups,name:eh_daily_disbursement.group_daily_disbursement_user
+msgid "User"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Value"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,field_description:eh_daily_disbursement.field_eh_daily_disbursement__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model:ir.model.fields,help:eh_daily_disbursement.field_eh_daily_disbursement_tag__product_categ_ids
+msgid ""
+"When set, sheets with this tag only accept products from these categories or"
+" their children."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/dashboard.py:0
+#, python-format
+msgid "Yes"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_search
+#, python-format
+msgid "Yesterday"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "You are not allowed to %(action)s daily disbursement sheets."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "a file"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "at the rate of"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "at the rate of the period end."
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "cancel"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "cancel confirmed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "close"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+#, python-format
+msgid "closed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "confirm"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "confirmed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "confirmed sheet(s) waiting to be closed"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "confirmed,"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "different products"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "draft"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "draft,"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.view_daily_disbursement_tag_form
+msgid "e.g. Perfumes"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "fill"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "import into"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+#, python-format
+msgid "net units"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "no tag"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+msgid "on"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "overdue draft sheet(s) to confirm"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "product %r not found"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "product is empty"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "products ·"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "quantity must be a number greater than zero"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#: code:addons/eh_daily_disbursement/models/daily_disbursement.py:0
+#, python-format
+msgid "reset"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "sheets"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_period_summary
+msgid "sheets ·"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "unit cost must be empty or a number of zero or more"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:eh_daily_disbursement.report_daily_disbursement_sheet
+#, python-format
+msgid "units"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-python
+#: code:addons/eh_daily_disbursement/wizards/import_lines.py:0
+#, python-format
+msgid "unknown type %r (use out or return)"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "vs previous period"
+msgstr ""
+
+#. module: eh_daily_disbursement
+#. odoo-javascript
+#: code:addons/eh_daily_disbursement/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "· compared with"
+msgstr ""

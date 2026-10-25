@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_daily_disbursement_line_analysis_tree" model="ir.ui.view">
+        <field name="name">eh.daily.disbursement.line.analysis.tree</field>
+        <field name="model">eh.daily.disbursement.line</field>
+        <field name="arch" type="xml">
+            <tree string="Disbursement Lines" create="0" edit="0" delete="0"
+                  decoration-muted="state == 'cancelled'">
+                <field name="date"/>
+                <field name="sheet_id"/>
+                <field name="tag_id" optional="show"/>
+                <field name="product_id"/>
+                <field name="product_categ_id" optional="hide"/>
+                <field name="move_type" widget="badge"
+                       decoration-danger="move_type == 'out'"
+                       decoration-success="move_type == 'return'"/>
+                <field name="qty"/>
+                <field name="uom_id" groups="uom.group_uom" optional="show"/>
+                <field name="unit_cost" optional="show"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="subtotal" sum="Total"/>
+                <field name="signed_subtotal" string="Net" sum="Net"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="state" widget="badge" optional="show"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'confirmed'"
+                       decoration-success="state == 'closed'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_daily_disbursement_line_pivot" model="ir.ui.view">
+        <field name="name">eh.daily.disbursement.line.pivot</field>
+        <field name="model">eh.daily.disbursement.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Disbursement Analysis" sample="1">
+                <field name="product_id" type="row"/>
+                <field name="move_type" type="col"/>
+                <field name="qty" type="measure"/>
+                <field name="subtotal" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_daily_disbursement_line_graph" model="ir.ui.view">
+        <field name="name">eh.daily.disbursement.line.graph</field>
+        <field name="model">eh.daily.disbursement.line</field>
+        <field name="arch" type="xml">
+            <graph string="Disbursement Analysis" type="bar" sample="1">
+                <field name="date" interval="day"/>
+                <field name="move_type"/>
+                <field name="subtotal" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_daily_disbursement_line_search" model="ir.ui.view">
+        <field name="name">eh.daily.disbursement.line.search</field>
+        <field name="model">eh.daily.disbursement.line</field>
+        <field name="arch" type="xml">
+            <search string="Disbursement Lines">
+                <field name="product_id"/>
+                <field name="product_categ_id"/>
+                <field name="tag_id"/>
+                <field name="sheet_id"/>
+                <separator/>
+                <filter string="Disbursed" name="out" domain="[('move_type', '=', 'out')]"/>
+                <filter string="Returned" name="return" domain="[('move_type', '=', 'return')]"/>
+                <separator/>
+                <filter string="Today" name="today"
+                        domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Date" name="filter_date" date="date"/>
+                <separator/>
+                <filter string="Not Cancelled" name="not_cancelled" domain="[('state', '!=', 'cancelled')]"/>
+                <filter string="Confirmed or Closed" name="validated"
+                        domain="[('state', 'in', ('confirmed', 'closed'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Day" name="group_day" context="{'group_by': 'date:day'}"/>
+                    <filter string="Product" name="group_product" context="{'group_by': 'product_id'}"/>
+                    <filter string="Product Category" name="group_categ" context="{'group_by': 'product_categ_id'}"/>
+                    <filter string="Category Tag" name="group_tag" context="{'group_by': 'tag_id'}"/>
+                    <filter string="Type" name="group_type" context="{'group_by': 'move_type'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_daily_disbursement_line_analysis" model="ir.actions.act_window">
+        <field name="name">Line Analysis</field>
+        <field name="res_model">eh.daily.disbursement.line</field>
+        <field name="view_mode">pivot,graph,tree</field>
+        <field name="search_view_id" ref="view_daily_disbursement_line_search"/>
+        <field name="context">{'search_default_not_cancelled': 1, 'search_default_filter_date': 1, 'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No disbursement lines for this period</p>
+        </field>
+    </record>
+</odoo>

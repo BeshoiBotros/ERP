@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily Disbursement | ERP Heritage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Daily product disbursement and return tracking for Odoo 17 Community: one sheet per company, day and category tag, a review-and-close workflow that cannot be bypassed, CSV/XLSX import, and a live cost dashboard with PDF and Excel export.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background-color:#FBF8F2;color:#0E1E2B;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;font-size:16px;line-height:1.6;font-weight:400;">
+
+<header style="background-color:#0E1E2B;color:#FBF8F2;padding:60px 24px 52px 24px;border-bottom:4px solid #D4A055;">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div style="margin-bottom:16px;"><span style="font-size:0.86rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#E8C887;font-family:'DM Mono',ui-monospace,monospace;">ERP Heritage &middot; Operations</span></div>
+    <div style="width:220px;height:2px;background-color:#D4A055;margin:14px 0 18px 0;"></div>
+    <span style="display:inline-block;font-family:'DM Mono',ui-monospace,monospace;font-size:0.78rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#D4A055;padding:4px 12px;border:1px solid rgba(212,160,85,0.65);border-radius:999px;margin:4px 6px 8px 0;">INVENTORY OPERATIONS</span>
+    <h1 style="font-size:2.6rem;margin:6px 0 10px 0;font-weight:700;letter-spacing:-0.01em;color:#FBF8F2;">Daily Disbursement</h1>
+    <p style="margin:14px 0 0 0;font-size:1.15rem;line-height:1.65;max-width:760px;color:rgba(251,248,242,0.88);">Record what goes out and what comes back every day, close each day with a sign-off nobody can skip, and see the net cost on a live dashboard you can print or export in one click.</p>
+    <div style="margin-top:24px;"><span style="display:inline-block;background-color:#D4A055;border:1px solid #A07A3F;color:#0E1E2B;padding:6px 14px;border-radius:999px;font-size:1.0rem;letter-spacing:0.04em;font-family:'DM Mono',ui-monospace,monospace;margin:4px 6px 0 0;font-weight:600;">Free · LGPL-3</span><span style="display:inline-block;background-color:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#FBF8F2;padding:5px 12px;border-radius:999px;font-size:0.86rem;letter-spacing:0.05em;font-family:'DM Mono',ui-monospace,monospace;margin:4px 6px 0 0;">DAILY SHEETS</span><span style="display:inline-block;background-color:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#FBF8F2;padding:5px 12px;border-radius:999px;font-size:0.86rem;letter-spacing:0.05em;font-family:'DM Mono',ui-monospace,monospace;margin:4px 6px 0 0;">LIVE DASHBOARD</span><span style="display:inline-block;background-color:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#FBF8F2;padding:5px 12px;border-radius:999px;font-size:0.86rem;letter-spacing:0.05em;font-family:'DM Mono',ui-monospace,monospace;margin:4px 6px 0 0;">v17.0.1.0.0</span></div>
+  </div>
+</header>
+
+<section style="background-color:#1A2C3D;color:#FBF8F2;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px;display:table;width:100%;table-layout:fixed;box-sizing:border-box;"><div style="display:table-cell;font-family:'DM Mono',ui-monospace,monospace;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:#E8C887;padding:0 10px;vertical-align:middle;"><span style="display:inline-block;width:7px;height:7px;background-color:#D4A055;border-radius:50%;margin-right:7px;vertical-align:middle;"></span>One sheet a day</div><div style="display:table-cell;font-family:'DM Mono',ui-monospace,monospace;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:#E8C887;padding:0 10px;vertical-align:middle;"><span style="display:inline-block;width:7px;height:7px;background-color:#D4A055;border-radius:50%;margin-right:7px;vertical-align:middle;"></span>Locked after confirm</div><div style="display:table-cell;font-family:'DM Mono',ui-monospace,monospace;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:#E8C887;padding:0 10px;vertical-align:middle;"><span style="display:inline-block;width:7px;height:7px;background-color:#D4A055;border-radius:50%;margin-right:7px;vertical-align:middle;"></span>Import CSV / XLSX</div><div style="display:table-cell;font-family:'DM Mono',ui-monospace,monospace;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:#E8C887;padding:0 10px;vertical-align:middle;"><span style="display:inline-block;width:7px;height:7px;background-color:#D4A055;border-radius:50%;margin-right:7px;vertical-align:middle;"></span>PDF &amp; Excel</div></div>
+</section>
+
+<section style="padding:54px 0;background-color:#FBF8F2;">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:0.92rem;text-transform:uppercase;letter-spacing:0.22em;color:#2C3845;margin:0 0 14px 0;font-weight:500;font-family:'DM Mono',ui-monospace,monospace;">Why this module</h2>
+    <h3 style="font-size:1.8rem;margin:0 0 26px 0;font-weight:600;color:#0E1E2B;">Daily figures you can trust and sign off.</h3>
+    <div style="display:table;width:100%;border-collapse:separate;border-spacing:18px;"><div style="display:table-row;">
+      <div style="display:table-cell;width:33.33%;vertical-align:top;"><div style="background-color:#0E1E2B;color:#FBF8F2;border:1px solid #A07A3F;padding:24px;border-radius:10px;height:100%;box-sizing:border-box;"><div style="font-family:'DM Mono',ui-monospace,monospace;font-size:0.78rem;letter-spacing:0.2em;color:#E8C887;margin-bottom:10px;">01 / RECORD</div><h3 style="font-size:1.15rem;font-weight:600;margin:0 0 8px 0;color:#FBF8F2;">One sheet per day and tag</h3><p style="font-size:1.0rem;color:rgba(251,248,242,0.86);line-height:1.6;margin:0;">Each company, day and category tag (e.g. Perfumes) gets exactly one sheet, enforced in the database. Lines snapshot the product cost when entered, so later cost changes never rewrite past days.</p></div></div>
+      <div style="display:table-cell;width:33.33%;vertical-align:top;"><div style="background-color:#F4EFE6;color:#0E1E2B;border:1px solid rgba(58,74,92,0.14);padding:24px;border-radius:10px;height:100%;box-sizing:border-box;"><div style="font-family:'DM Mono',ui-monospace,monospace;font-size:0.78rem;letter-spacing:0.2em;color:#D4A055;margin-bottom:10px;">02 / CONTROL</div><h3 style="font-size:1.15rem;font-weight:600;margin:0 0 8px 0;color:#0E1E2B;">A sign-off nobody can skip</h3><p style="font-size:1.0rem;color:#2C3845;line-height:1.6;margin:0;">Users confirm, managers close. Status changes only through those buttons, never a direct write, and a confirmed day's lines are locked for everyone until a manager reopens it. Who confirmed and closed is stamped on the sheet.</p></div></div>
+      <div style="display:table-cell;width:33.33%;vertical-align:top;"><div style="background-color:#F4EFE6;color:#0E1E2B;border:1px solid rgba(58,74,92,0.14);padding:24px;border-radius:10px;height:100%;box-sizing:border-box;"><div style="font-family:'DM Mono',ui-monospace,monospace;font-size:0.78rem;letter-spacing:0.2em;color:#D4A055;margin-bottom:10px;">03 / INSIGHT</div><h3 style="font-size:1.15rem;font-weight:600;margin:0 0 8px 0;color:#0E1E2B;">Every number opens its lines</h3><p style="font-size:1.0rem;color:#2C3845;line-height:1.6;margin:0;">The dashboard compares any period with the one before, charts the daily trend and the top products, and every card, bar, day and row opens the exact lines behind it. The same figures print as PDF or export to Excel.</p></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section style="padding:54px 0;background-color:#F4EFE6;border-top:1px solid rgba(58,74,92,0.10);">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:0.92rem;text-transform:uppercase;letter-spacing:0.22em;color:#2C3845;margin:0 0 14px 0;font-weight:500;font-family:'DM Mono',ui-monospace,monospace;">See it</h2>
+    <h3 style="font-size:1.6rem;margin:0 0 22px 0;font-weight:600;color:#0E1E2B;">The dashboard and a daily sheet.</h3>
+    <img src="dashboard.png" alt="Daily Disbursement dashboard" style="display:block;width:100%;max-width:1180px;border-radius:10px;border:1px solid rgba(58,74,92,0.18);margin:0 0 22px 0;">
+    <img src="sheet_form.png" alt="A daily disbursement sheet" style="display:block;width:100%;max-width:1180px;border-radius:10px;border:1px solid rgba(58,74,92,0.18);">
+  </div>
+</section>
+
+<section style="padding:54px 0;background-color:#FBF8F2;">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:0.92rem;text-transform:uppercase;letter-spacing:0.22em;color:#2C3845;margin:0 0 14px 0;font-weight:500;font-family:'DM Mono',ui-monospace,monospace;">Day in the life</h2>
+    <h3 style="font-size:1.6rem;margin:0 0 18px 0;font-weight:600;color:#0E1E2B;">A store keeper records the day; a manager closes it.</h3>
+    <ol style="margin:0;padding:0 0 0 22px;max-width:920px;color:#2C3845;font-size:1.0rem;line-height:1.7;">
+      <li style="padding:4px 0;">Open today's sheet and press <b>Copy Previous Sheet</b> for a usual day, or <b>Import Lines</b> from a CSV or XLSX file (English or Arabic headers). Adjust quantities and add returns.</li>
+      <li style="padding:4px 0;">Press <b>Confirm</b>. The lines lock and the sheet waits for a manager. A draft left past its day gets a reminder activity automatically.</li>
+      <li style="padding:4px 0;">The manager reviews and presses <b>Close Day</b>, then prints the sheet with its signature lines if a paper trail is needed.</li>
+      <li style="padding:4px 0;">At month end, open the dashboard, pick the period, and export the summary as PDF or every line as Excel.</li>
+    </ol>
+  </div>
+</section>
+
+<section style="padding:54px 0;background-color:#0E1E2B;color:#FBF8F2;">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:0.92rem;text-transform:uppercase;letter-spacing:0.22em;color:#E8C887;margin:0 0 14px 0;font-weight:500;font-family:'DM Mono',ui-monospace,monospace;">What is inside</h2>
+    <h3 style="font-size:1.6rem;margin:0 0 18px 0;font-weight:600;color:#FBF8F2;">Built to do the job, end to end.</h3>
+    <ul style="margin:0;padding:0 0 0 20px;max-width:980px;color:rgba(251,248,242,0.86);font-size:1.0rem;line-height:1.7;">
+      <li>Daily sheets with disbursed and returned tabs, stored totals, chatter and approval stamps.</li>
+      <li>Category tags with colours and optional product-category restrictions, enforced on the server.</li>
+      <li>All-or-nothing CSV / XLSX import: every problem is listed with its row number and nothing is saved until the file is clean.</li>
+      <li>Line analysis in pivot, graph and list views; a daily reminder for overdue drafts.</li>
+      <li>Live dashboard: today, yesterday, week, month, last 30 days or a custom range, compared with the previous period; multi-company with currency conversion.</li>
+      <li>PDF daily sheet and period summary, and a five-sheet Excel export (summary, by day, products, by tag, every line).</li>
+      <li>User and Manager roles, read-only access for the EH Auditor, company isolation, and a full automated test suite.</li>
+      <li>Complete Arabic translation, with a right-to-left dashboard.</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding:48px 0;background-color:#F4EFE6;border-top:1px solid rgba(58,74,92,0.10);">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:0.92rem;text-transform:uppercase;letter-spacing:0.22em;color:#2C3845;margin:0 0 12px 0;font-weight:500;font-family:'DM Mono',ui-monospace,monospace;">Honest about the edges</h2>
+    <h3 style="font-size:1.4rem;margin:0 0 16px 0;font-weight:600;color:#0E1E2B;">What this does not do, so nothing surprises you.</h3>
+    <ul style="margin:0;padding:0;list-style:none;max-width:920px;">
+      <li style="padding:7px 0;color:#2C3845;font-size:1.0rem;line-height:1.6;">It tracks cost; it does not post journal entries or move stock. Inventory levels in the Inventory app are not touched.</li>
+      <li style="padding:7px 0;color:#2C3845;font-size:1.0rem;line-height:1.6;">Quantity totals add up units across different products, so treat them as an indicator; cost totals are exact.</li>
+      <li style="padding:7px 0;color:#2C3845;font-size:1.0rem;line-height:1.6;">Across companies with different currencies, dashboard amounts are converted at the period-end rate, not each line's own date.</li>
+      <li style="padding:7px 0;color:#2C3845;font-size:1.0rem;line-height:1.6;">Returns are not linked to the disbursement they reverse; they are recorded per day like any other line.</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding:44px 0;background-color:#FBF8F2;">
+  <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:0.92rem;text-transform:uppercase;letter-spacing:0.22em;color:#2C3845;margin:0 0 12px 0;font-weight:500;font-family:'DM Mono',ui-monospace,monospace;">Languages</h2>
+    <h3 style="font-size:1.4rem;margin:0 0 6px 0;font-weight:600;color:#0E1E2B;">Available in 2 languages</h3>
+    <div><span style="display:inline-block;background-color:#FFFFFF;border:1px solid rgba(160,122,63,0.40);color:#2C3845;padding:6px 14px;border-radius:999px;font-size:0.9rem;font-weight:500;margin:7px 8px 0 0;">English</span><span style="display:inline-block;background-color:#FFFFFF;border:1px solid rgba(160,122,63,0.40);color:#2C3845;padding:6px 14px;border-radius:999px;font-size:0.9rem;font-weight:500;margin:7px 8px 0 0;">العربية</span></div>
+  </div>
+</section>
+
+<footer style="background-color:#0E1E2B;color:rgba(251,248,242,0.7);padding:26px 24px;text-align:center;font-size:0.86rem;border-top:4px solid #D4A055;">
+  Made with &#x2665; from Melbourne, Australia by <a href="https://www.erpheritage.com.au/" target="_blank" style="color:#E8C887;text-decoration:none;">ERP Heritage</a>
+</footer>
+</body>
+</html>

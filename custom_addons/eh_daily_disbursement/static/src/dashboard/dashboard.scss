@@ -1,0 +1,559 @@
+// ============================================================================
+// ERP Heritage
+// Copyright (C) 2026 (https://www.erpheritage.com.au/)
+// ============================================================================
+//
+// Daily Disbursement dashboard. Sits on the house "command centre" ground:
+// the root also carries .eh_dashboard_root, so every var(--eh-*) resolves to
+// the eh_account_base token bridge; each use keeps a fallback in case the
+// bridge is missing. Logical properties (inline-start/end) keep the layout
+// correct in Arabic (RTL) without a mirrored stylesheet.
+
+.o_eh_dd {
+    // Series colours, validated (CVD + contrast) against --eh-surface.
+    --eh-dd-series-out: #3987e5;
+    --eh-dd-series-return: #d95926;
+
+    height: 100%;
+    overflow: auto;
+    padding: var(--eh-6, 24px);
+    background: var(--eh-bg-grad, none), var(--eh-bg, #080C0A);
+    color: var(--eh-text, #E8EDE9);
+    font-family: var(--eh-font, system-ui, sans-serif);
+
+    h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--eh-text, #E8EDE9);
+    }
+
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: var(--eh-2, 8px);
+        margin: 0 0 var(--eh-4, 16px);
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--eh-text, #E8EDE9);
+    }
+
+    h3 {
+        margin: var(--eh-3, 12px) 0 var(--eh-1, 4px);
+        font-size: 1.05rem;
+        color: var(--eh-text, #E8EDE9);
+    }
+
+    small {
+        color: var(--eh-text-muted, #7E9089);
+    }
+}
+
+.o_eh_dd_muted {
+    color: var(--eh-text-muted, #7E9089);
+}
+
+.o_eh_dd_num {
+    font-family: var(--eh-mono, ui-monospace, monospace);
+    font-variant-numeric: tabular-nums;
+    text-align: end;
+    white-space: nowrap;
+}
+
+// ---- header & filters -------------------------------------------------------
+
+.o_eh_dd_header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--eh-4, 16px);
+    margin-bottom: var(--eh-5, 20px);
+}
+
+.o_eh_dd_subtitle {
+    display: block;
+    margin-top: var(--eh-1, 4px);
+    color: var(--eh-text-dim, #A6BAAF);
+}
+
+.o_eh_dd_filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--eh-3, 12px);
+}
+
+.o_eh_dd_segmented {
+    display: inline-flex;
+    flex-wrap: wrap;
+    padding: 3px;
+    border: 1px solid var(--eh-border, #1E2A24);
+    border-radius: var(--eh-radius-sm, 10px);
+    background: var(--eh-surface, #0F1512);
+
+    button {
+        padding: 6px 12px;
+        border: 0;
+        border-radius: 7px;
+        background: transparent;
+        color: var(--eh-text-dim, #A6BAAF);
+        font-size: 0.85rem;
+
+        &:hover {
+            color: var(--eh-text, #E8EDE9);
+        }
+
+        &.active {
+            background: var(--eh-accent-soft, rgba(123, 206, 160, 0.10));
+            color: var(--eh-accent, #7BCEA0);
+            font-weight: 600;
+        }
+    }
+}
+
+.o_eh_dd_range {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--eh-2, 8px);
+}
+
+.o_eh_dd_range input,
+.o_eh_dd_select {
+    width: auto;
+    padding: 6px 10px;
+    border: 1px solid var(--eh-border, #1E2A24);
+    border-radius: var(--eh-radius-sm, 10px);
+    background: var(--eh-surface, #0F1512);
+    color: var(--eh-text, #E8EDE9);
+    font-size: 0.85rem;
+}
+
+.o_eh_dd_switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--eh-2, 8px);
+    margin: 0;
+    color: var(--eh-text-dim, #A6BAAF);
+    font-size: 0.85rem;
+    cursor: pointer;
+
+    input {
+        accent-color: var(--eh-accent, #7BCEA0);
+    }
+}
+
+.o_eh_dd_export {
+    display: inline-flex;
+    gap: var(--eh-2, 8px);
+
+    button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border: 1px solid var(--eh-border, #1E2A24);
+        border-radius: var(--eh-radius-sm, 10px);
+        background: var(--eh-surface, #0F1512);
+        color: var(--eh-text-dim, #A6BAAF);
+        font-size: 0.85rem;
+
+        &:hover:not(:disabled) {
+            border-color: var(--eh-border-strong, #2A3B32);
+            color: var(--eh-text, #E8EDE9);
+        }
+    }
+}
+
+.o_eh_dd_spinner {
+    color: var(--eh-text-muted, #7E9089);
+}
+
+// ---- notices & action strip ---------------------------------------------------
+
+.o_eh_dd_notice {
+    margin-bottom: var(--eh-4, 16px);
+    padding: var(--eh-3, 12px) var(--eh-4, 16px);
+    border: 1px solid var(--eh-border, #1E2A24);
+    border-radius: var(--eh-radius-sm, 10px);
+    background: var(--eh-info-soft, rgba(123, 182, 224, 0.12));
+    color: var(--eh-text-dim, #A6BAAF);
+}
+
+.o_eh_dd_notice_error {
+    background: var(--eh-down-soft, rgba(224, 140, 123, 0.12));
+    color: var(--eh-text, #E8EDE9);
+}
+
+.o_eh_dd_actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eh-3, 12px);
+    margin-bottom: var(--eh-4, 16px);
+}
+
+.o_eh_dd_action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--eh-2, 8px);
+    padding: var(--eh-2, 8px) var(--eh-4, 16px);
+    border: 1px solid var(--eh-border-strong, #2A3B32);
+    border-radius: 999px;
+    background: var(--eh-warn-soft, rgba(224, 194, 123, 0.12));
+    color: var(--eh-text, #E8EDE9);
+
+    i {
+        color: var(--eh-warn, #E0C27B);
+    }
+
+    &:hover {
+        border-color: var(--eh-warn, #E0C27B);
+    }
+}
+
+// ---- body --------------------------------------------------------------------
+
+.o_eh_dd_body {
+    transition: opacity 120ms ease;
+
+    &.o_eh_dd_stale {
+        opacity: 0.55;
+        pointer-events: none;
+    }
+}
+
+.o_eh_dd_loading {
+    padding: var(--eh-10, 40px);
+    text-align: center;
+    color: var(--eh-text-muted, #7E9089);
+}
+
+.o_eh_dd_card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--eh-5, 20px);
+    border: 1px solid var(--eh-border, #1E2A24);
+    border-radius: var(--eh-radius, 14px);
+    background: var(--eh-surface, #0F1512);
+}
+
+.o_eh_dd_grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--eh-4, 16px);
+    margin-bottom: var(--eh-4, 16px);
+
+    @media (min-width: 992px) {
+        &.o_eh_dd_grid_2_1 {
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        }
+
+        &.o_eh_dd_grid_1_1 {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+    }
+}
+
+// ---- KPI cards -------------------------------------------------------------------
+
+.o_eh_dd_kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--eh-4, 16px);
+    margin-bottom: var(--eh-4, 16px);
+}
+
+.o_eh_dd_kpi {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--eh-1, 4px);
+    padding: var(--eh-5, 20px);
+    border: 1px solid var(--eh-border, #1E2A24);
+    border-radius: var(--eh-radius, 14px);
+    background: var(--eh-surface, #0F1512);
+    color: inherit;
+    text-align: start;
+
+    &:not(.o_eh_dd_kpi_static):hover {
+        border-color: var(--eh-border-strong, #2A3B32);
+        background: var(--eh-surface-hover, #18221C);
+    }
+
+    &.o_eh_dd_kpi_net {
+        border-color: var(--eh-accent-glow, rgba(123, 206, 160, 0.16));
+    }
+}
+
+.o_eh_dd_kpi_label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--eh-2, 8px);
+    color: var(--eh-text-dim, #A6BAAF);
+    font-size: 0.85rem;
+}
+
+.o_eh_dd_kpi_value {
+    font-family: var(--eh-mono, ui-monospace, monospace);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--eh-text, #E8EDE9);
+
+    small {
+        font-family: var(--eh-font, system-ui, sans-serif);
+        font-size: 0.9rem;
+        font-weight: 400;
+    }
+}
+
+.o_eh_dd_kpi_sub {
+    color: var(--eh-text-muted, #7E9089);
+    font-size: 0.85rem;
+}
+
+.o_eh_dd_delta {
+    margin-top: var(--eh-2, 8px);
+    color: var(--eh-text-dim, #A6BAAF);
+    font-size: 0.8rem;
+}
+
+.o_eh_dd_states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eh-3, 12px);
+
+    b {
+        font-family: var(--eh-mono, ui-monospace, monospace);
+        color: var(--eh-text, #E8EDE9);
+    }
+}
+
+.o_eh_dd_swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+
+    &.o_eh_dd_swatch_out {
+        background: var(--eh-dd-series-out);
+    }
+
+    &.o_eh_dd_swatch_return {
+        background: var(--eh-dd-series-return);
+    }
+}
+
+// ---- charts ------------------------------------------------------------------------
+
+// Fills its card, so side-by-side cards of different heights line up.
+.o_eh_dd_chart {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 300px;
+}
+
+.o_eh_dd_empty {
+    margin-bottom: var(--eh-4, 16px);
+    padding: var(--eh-10, 40px);
+    text-align: center;
+    color: var(--eh-text-dim, #A6BAAF);
+}
+
+// ---- tables ------------------------------------------------------------------------
+
+.o_eh_dd_table_wrap {
+    max-height: 360px;
+    overflow: auto;
+}
+
+.o_eh_dd_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+
+    th {
+        position: sticky;
+        top: 0;
+        padding: var(--eh-2, 8px);
+        border-bottom: 1px solid var(--eh-border-strong, #2A3B32);
+        background: var(--eh-surface, #0F1512);
+        color: var(--eh-text-muted, #7E9089);
+        font-weight: 500;
+        text-align: start;
+
+        &.o_eh_dd_num {
+            text-align: end;
+        }
+    }
+
+    td {
+        padding: var(--eh-2, 8px);
+        border-bottom: 1px solid var(--eh-border, #1E2A24);
+        color: var(--eh-text-dim, #A6BAAF);
+    }
+
+    tbody tr:not(.o_eh_dd_table_empty) {
+        cursor: pointer;
+
+        &:hover td {
+            background: var(--eh-surface-hover, #18221C);
+            color: var(--eh-text, #E8EDE9);
+        }
+    }
+
+    tfoot td {
+        position: sticky;
+        bottom: 0;
+        border-bottom: 0;
+        border-top: 1px solid var(--eh-border-strong, #2A3B32);
+        background: var(--eh-surface, #0F1512);
+        color: var(--eh-text, #E8EDE9);
+        font-weight: 600;
+    }
+}
+
+.o_eh_dd_note {
+    margin: var(--eh-2, 8px) 0 0;
+    font-size: 0.8rem;
+}
+
+.o_eh_dd_net_banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--eh-3, 12px);
+    margin-bottom: var(--eh-4, 16px);
+    padding: var(--eh-4, 16px);
+    border: 1px solid var(--eh-accent-glow, rgba(123, 206, 160, 0.16));
+    border-radius: var(--eh-radius, 14px);
+    background: var(--eh-accent-soft, rgba(123, 206, 160, 0.10));
+    color: var(--eh-text-dim, #A6BAAF);
+
+    b {
+        font-family: var(--eh-mono, ui-monospace, monospace);
+        font-size: 1.3rem;
+        color: var(--eh-text, #E8EDE9);
+    }
+}
+
+// ---- tag list & recent activity ----------------------------------------------------------
+
+.o_eh_dd_tags,
+.o_eh_dd_recent {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: grid;
+        align-items: center;
+        gap: var(--eh-3, 12px);
+        padding: var(--eh-2, 8px) 0;
+        border-bottom: 1px solid var(--eh-border, #1E2A24);
+        color: var(--eh-text-dim, #A6BAAF);
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+}
+
+.o_eh_dd_tags li {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
+
+    &.o_eh_dd_clickable {
+        cursor: pointer;
+
+        &:hover {
+            color: var(--eh-text, #E8EDE9);
+        }
+    }
+}
+
+.o_eh_dd_tag_name {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--eh-2, 8px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.o_eh_dd_tag_dot {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    // Colour comes from Odoo's o_tag_color_<n> class (the tag's own colour).
+    box-shadow: inset 0 0 0 1px var(--eh-border-strong, #2A3B32);
+}
+
+.o_eh_dd_meter {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--eh-flat-soft, rgba(133, 151, 142, 0.14));
+    overflow: hidden;
+
+    span {
+        display: block;
+        height: 100%;
+        border-radius: 3px;
+        background: var(--eh-dd-series-out);
+    }
+}
+
+.o_eh_dd_recent li {
+    grid-template-columns: 52px minmax(0, 1fr) auto auto;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--eh-text, #E8EDE9);
+    }
+}
+
+.o_eh_dd_recent_product {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    small {
+        margin-inline-start: var(--eh-2, 8px);
+    }
+}
+
+// Identity lives in the swatch; the number keeps text ink.
+.o_eh_dd_qty_out::before,
+.o_eh_dd_qty_return::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-inline-end: 6px;
+    border-radius: 2px;
+}
+
+.o_eh_dd_qty_out::before {
+    background: var(--eh-dd-series-out);
+}
+
+.o_eh_dd_qty_return::before {
+    background: var(--eh-dd-series-return);
+}
+
+// Narrow screens: one column everywhere, filters stacked.
+@media (max-width: 575.98px) {
+    .o_eh_dd {
+        padding: var(--eh-4, 16px);
+    }
+
+    .o_eh_dd_recent li {
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+
+        > :last-child {
+            display: none;
+        }
+    }
+}
