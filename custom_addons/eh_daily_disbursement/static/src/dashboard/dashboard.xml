@@ -2,7 +2,10 @@
 <templates xml:space="preserve">
 
     <t t-name="eh_daily_disbursement.Dashboard">
-        <div class="o_action eh_dashboard_root o_eh_dd" t-ref="root">
+        <!-- Odoo pins .o_action to the viewport with overflow: hidden, so the
+             scrolling happens on the inner element, like Odoo's own views. -->
+        <div class="o_action o_eh_dd_frame">
+        <div class="eh_dashboard_root o_eh_dd" t-ref="root">
 
             <!-- Header + filters (one row, wraps on narrow screens) -->
             <header class="o_eh_dd_header">
@@ -249,6 +252,7 @@
             <div t-elif="state.loading" class="o_eh_dd_loading">
                 <i class="fa fa-circle-o-notch fa-spin fa-2x"/>
             </div>
+        </div>
         </div>
     </t>
 

@@ -14,7 +14,9 @@
     --eh-dd-series-out: #3987e5;
     --eh-dd-series-return: #d95926;
 
-    height: 100%;
+    // Fill the rest of the (flex column) .o_action and scroll inside it.
+    flex: 1 1 auto;
+    min-height: 0;
     overflow: auto;
     padding: var(--eh-6, 24px);
     background: var(--eh-bg-grad, none), var(--eh-bg, #080C0A);
